@@ -64,6 +64,31 @@ end
 ![](image/README1.jpg)
 
 导出lua格式:
+```
+return {
+  name = [[Or]],
+  desc = [[英雄AI]],
+  children = {
+    {
+      name = [[And]],
+      desc = [[攻击]],
+      children = {
+        {
+          name = [[FindEnemy]],
+          desc = [[查找范围敌人]],
+          args = {w=100,h=50,},
+          output = {"enemy",},
+        },
+        {
+          name = [[Attack]],
+          desc = [[普通攻击]],
+          input = {"enemy",},
+          args = {skillid = 101,},
+        },
+      },
+    },
+    ...
+```
 
 ## 运行测试用例
 + 导出行为树
@@ -73,7 +98,7 @@ lua export.lua tree/hero.mm data/hero.lua
 + 运行测试
 
 ## TODO
-计划使用antd来为这套方案做一个网页版的行为树编辑器，准备做的通用点，导出json等格式，带调试功能，不过我前端渣渣，求大神带。ps:antd-pro最近出了个思维导图插件，感觉能用的上。。。
+计划使用antd来为这套方案做一个网页版的行为树编辑器，准备做的通用点，导出json等格式，带调试功能，不过我前端渣渣，不知道能不能捣鼓出来。ps:最近antd-pro出了个思维导图插件，感觉能用的上。。。
 
 ## About
 这套方案我已经在好几个项目中使用过，动作，卡牌，MOBA，MMO类都有，教会策划，快活一年。这仅仅是一种思路，各位路过的大神，有啥建议或看法，欢迎提Issue。
