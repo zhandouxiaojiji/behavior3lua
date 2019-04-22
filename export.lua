@@ -1,6 +1,6 @@
 local src_path, dest_path = ...
 
-local xml = require("xmlSimple").newParser()
+local xml = require("lualib.xml_parser").newParser()
 local root = xml:ParseXmlText(io.open(src_path):read("*a"))
 
 local file = io.open(dest_path, "w")
@@ -29,23 +29,14 @@ end
 write('return ')
 
 local function write_node(node, isroot)
-    local function node_attr(attr)
-        for _, v in ipairs(node:children()) do
-            local text = v["@TEXT"]
-            if string.find(text, attr) then
-                return text, v
-            end
-        end
-    end
-
     local function node_args(args)
         local str = ""
         for _, v in ipairs(args:children()) do
-            str = str .. v["@TEXT"] .. ", "
+            str = str .. v["@TEXT"] .. ","
         end
         return str
     end
-    
+
     local function node_vars(args)
         local str = ""
         for _, v in ipairs(args:children()) do
@@ -56,19 +47,19 @@ local function write_node(node, isroot)
 
     writel('{')
     indent(2)
-    writel('name = [[%s]], ', string.match(node["@TEXT"], "(%w+)"))
-    writel('desc = [[%s]], ', string.match(node["@TEXT"], "%((.+)%)"))
+    writel('name = [[%s]],', string.match(node["@TEXT"],"(%w+)"))
+    writel('desc = [[%s]],', string.match(node["@TEXT"],"%((.+)%)"))
 
     local children = {}
 
     for _, v in ipairs(node:children()) do
         local text = v['@TEXT']
         if text == "args" then
-            writel('args = {%s}, ', node_args(v))
+            writel('args = {%s},', node_args(v))
         elseif text == "input" then
-            writel('input = {%s}, ', node_vars(v))
+            writel('input = {%s},', node_vars(v))
         elseif text == "output" then
-            writel('output = {%s}, ', node_vars(v))
+            writel('output = {%s},', node_vars(v))
         else
             children[#children + 1] = v
         end
