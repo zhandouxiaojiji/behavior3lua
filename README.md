@@ -96,6 +96,9 @@ return {
 lua export.lua tree/hero.mm data/hero.lua
 ```
 + 运行测试
+```
+lua test.lua
+```
 
 ## TODO
 计划使用antd来为这套方案做一个网页版的行为树编辑器，准备做的通用点，导出json等格式，带调试功能，不过我前端渣渣，不知道能不能捣鼓出来。ps:最近antd-pro出了个思维导图插件，感觉能用的上。。。
