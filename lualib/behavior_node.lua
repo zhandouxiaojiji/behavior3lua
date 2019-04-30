@@ -1,10 +1,4 @@
-local Behaviors = require "fight.ai.behaviors"
-local Log = require "log"
-
 local node_id = 1
-
-local mt = {}
-mt.__index = mt
 
 local function new_node(...)
     local obj = setmetatable({}, mt)
@@ -12,16 +6,18 @@ local function new_node(...)
     return obj
 end
 
+local mt = {}
+mt.__index = mt
+
 function mt:init(node_data, tree)
     self.name = node_data.name
     self.tree = tree
-    if tree then
-        self.avatar = tree.avatar
-        self.map = tree.map
-        self.fight = tree.fight
-    end
+    self.owner = tree.owner
+    self.ctx = tree.ctx
+
     self.node_id = node_id
     node_id = node_id + 1
+
     self.data = node_data
     self.args = self.data.args or {}
     self.children = {}
@@ -36,7 +32,7 @@ function mt:run()
     for i,v in ipairs(self.data.input or {}) do
         vars[i] = self:get_var(v)
     end
-    local func = assert(Behaviors[self.name], self.name)
+    local func = assert(self.tree.process[self.name], self.name)
     vars = table.pack(func(self, table.unpack(vars)))
     for i,v in ipairs(self.data.output or {}) do
         self:set_var(v, vars[i+1])

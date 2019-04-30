@@ -1,9 +1,5 @@
 -- 节点逻辑
 
-local Log = require "log"
-local Util = require "fight.util"
-local Define = require "fight.define"
-
 local M = {}
 -- 选择执行, 执行所有子节点直到返回true
 function M:Or()
@@ -61,85 +57,14 @@ function M:RunDelay()
     return self.args.ret
 end
 
--- 行为节点
----------------------------------------------------------
--- 注册被攻击
-function M:ListenUnderAttack()
-    if self:get_var("UNDER_ATTACK") then
-        return false
-    end
-    self:set_var("UNDER_ATTACK", true)
-
-    local mine = self.avatar
-    local fight = mine:get_fight()
-    fight:add_event_listener(mine.avatarid, Define.EVENT.UNDER_ATK, function(params)
-        self:set_var(self.data.input[1], params.source)
-    end)
-
-    return false
-end
-
--- 寻找攻击范围内最近的敌人
-function M:FindEnemyCanAttack()
-    local mine = self.avatar
-    local x, y = mine:get_pos()
-    local w = mine:get_conf().ai.atk
-    local h = Define.ENEMY_HEIGHT
-    local map = mine:get_map()
-    local list = map:find_avatar(function(t)
-        if not Util.is_enemy(mine, t) then
-            return false
-        end
-        return Util.is_in_range(t, mine, -w/2, -h/2, w, h)
-    end)
-
-    table.sort(list, function(a, b)
-        return Util.distance(mine, a) < Util.distance(mine, b)
-    end)
-
-    local enemy = list[1]
-    if enemy then
-        return true, enemy
-    else
-        return false
-    end
-end
-
 -- 普通攻击
 function M:NormalAttack(enemy)
     if not enemy then
         return false
     end
 
-    local mine = self.avatar
-    local x1, y1 = mine:get_pos()
-    local x2, y2 = enemy:get_pos()
-    local range = mine:get_conf().ai.atk
-    if Util.distance(mine, enemy) > range then
-        return false
-    end
-    Log.Info("AI 普通攻击")
-    local face = x2 > x1 and 1 or -1
-    mine:set_facedir(face)
-
-    local skillid
-    for _, v in ipairs(mine.skills) do
-        if v.type == Define.SKILL_TYPE.ATTACK then
-            skillid = v.id
-            break
-        end
-    end
-    if not skillid then
-        return false
-    end
-    mine:launch_skill(skillid)
+    print("AI 普通攻击")
     return true
-end
-
-function M:MonsterFindEnemy()
-    local mine = self.avatar
-    local w = mine:get_conf().ai.alert
-    return M.FindEnemy(self, w, Define.ENEMY_HEIGHT)
 end
 
 -- 查找最近的敌人(从近到远， 返回单个)
@@ -150,12 +75,8 @@ function M:FindEnemy(w, h)
     if not w then
         w, h = args.w, args.h
     end
-    local map = mine:get_map()
-    local list = map:find_avatar(function(t)
-        if not Util.is_enemy(mine, t) then
-            return false
-        end
-        return Util.is_in_range(t, mine, -w/2, -h/2, w, h)
+    local list = self.ctx:find(function(t)
+        return true
     end, args.count)
 
 
