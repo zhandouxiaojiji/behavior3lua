@@ -1,6 +1,6 @@
 local src_path, dest_path = ...
 
-local xml = require("lualib.xml_parser").newParser()
+local xml = require("xml_parser").newParser()
 local root = xml:ParseXmlText(io.open(src_path):read("*a"))
 
 local file = io.open(dest_path, "w")
