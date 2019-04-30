@@ -20,14 +20,14 @@ return {
         {
           name = [[Log]],
           desc = [[进攻]],
-          args = {str="进攻",},
+          args = {str="Attack!",},
         },
       },
     },
     {
       name = [[Log]],
       desc = [[逃跑]],
-      args = {str="逃跑",},
+      args = {str="Run!",},
     },
   },
 }
