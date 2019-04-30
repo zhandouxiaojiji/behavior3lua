@@ -1,13 +1,13 @@
 local node_id = 1
 
+local mt = {}
+mt.__index = mt
+
 local function new_node(...)
     local obj = setmetatable({}, mt)
     obj:init(...)
     return obj
 end
-
-local mt = {}
-mt.__index = mt
 
 function mt:init(node_data, tree)
     self.name = node_data.name
