@@ -59,44 +59,56 @@ end
 行为树通常是作为一种决策树来使用，但决策树是每帧执行一次，当需要执行一系列动作的时候，决策树需要停下来，否则重复的命令会打断原来的行为。一般常用的做法有，使用行为树做决策，使用状态机做行为。缺点是实现起来更复杂，在状态机的时候很难再做决策。还有一做法是，在执行动作的时候把行为树挂起，完成一个动作继续往下执行。我的做法是构造一些特殊节点，行为树每帧都跑，但在做行为的时候，跑的某些特定的子节点，直到符合结束条件才点跳回根节点重新决策，这个具体看项目需求吧。
 
 ## 编辑器
-+ N年前用Unity扩展写过一个行为树编辑器，功能比较强大，还能调试。这个代码就不开源了，因为unity版本太低，跟项目耦合太多，没法单独使用。我还写过一篇类似文档的东西，可以参考一下。[Moba游戏AI设计文档](Moba.md)
-![](image/moba8.png)
+
 
 + 专门写编辑器成本太高，我现在使用Freemind这款思维导图软件作为我们的编辑器，按照约定的格式画好，保存成xml格式，再转换成项目使用的格式。
 
-![](image/README1.jpg)
+![](image/monster.png)
 
 导出lua格式:
 ```
 return {
   name = [[Or]],
-  desc = [[英雄AI]],
+  desc = [[怪物AI]],
   children = {
     {
       name = [[And]],
       desc = [[攻击]],
       children = {
         {
-          name = [[FindEnemy]],
-          desc = [[查找范围敌人]],
-          args = {w=100,h=50,},
-          output = {"enemy",},
+          name = [[GetHp]],
+          desc = [[获取血量]],
+          output = {"hp",},
         },
         {
-          name = [[Attack]],
-          desc = [[普通攻击]],
-          input = {"enemy",},
-          args = {skillid = 101,},
+          name = [[Cmp]],
+          desc = [[大于50]],
+          input = {"hp",},
+          args = {ge = 50,},
+        },
+        {
+          name = [[Log]],
+          desc = [[进攻]],
+          args = {str="Attack!",},
         },
       },
     },
-    ...
+    {
+      name = [[Log]],
+      desc = [[逃跑]],
+      args = {str="Run!",},
+    },
+  },
+}
 ```
+
++ N年前用Unity扩展写过一个行为树编辑器，功能比较强大，还能调试。这个代码就不开源了，因为unity版本太低，跟项目耦合太多，没法单独使用。我还写过一篇类似文档的东西，可以参考一下。[Moba游戏AI设计文档](Moba.md)
+![](image/moba8.png)
 
 ## 运行测试用例
 + 导出行为树
 ```
-lua export.lua tree/hero.mm data/hero.lua
+lua export.lua tree/monster.mm data/monster.lua
 ```
 + 运行测试
 ```
