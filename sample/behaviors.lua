@@ -86,7 +86,7 @@ function M:Attack(enemy)
         return false
     end
 
-    print("AI 普通攻击")
+    print "Do Attack"
     return true
 end
 
@@ -98,7 +98,8 @@ function M:FindEnemy(w, h)
         w, h = args.w, args.h
     end
     local list = self.ctx:find(function(t)
-        return true
+        local tx, ty = t.x, t.y
+        return math.abs(x - tx) <= w and math.abs(y - ty) <= h
     end, args.count)
 
     local enemy = list[1]
@@ -111,7 +112,7 @@ end
 
 
 function M:Idle()
-    print("AI 待机")
+    print "Do Idle"
 end
 
 function M:Wait()

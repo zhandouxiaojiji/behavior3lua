@@ -6,19 +6,44 @@ local process       = require "sample.behaviors"
 local tree_hero     = require "data.hero"
 local tree_monster  = require "data.monster"
 
-local ctx = {
-    time = 0,
-}
 local monster = {
     hp = 100,
+    x = 5,
+    y = 0,
 }
 
-local btree = behavior_tree.new(tree_monster, process, monster, ctx)
+local hero = {
+    hp = 100,
+    x = 0,
+    y = 0,
+}
 
-print("run monster ai")
+local ctx = {
+    time = 0,
+    avatars = {monster, hero},
+}
+function ctx:find(func)
+    local list = {}
+    for _, v in pairs(ctx.avatars) do
+        if func(v) then
+            list[#list+1] = v
+        end
+    end
+    return list
+end
+
+local btree1 = behavior_tree.new(tree_monster, process, monster, ctx)
+
+print "run monster ai"
 monster.hp = 100
-btree:run()
+btree1:run()
 
-print("run monster ai")
+print "run monster ai"
 monster.hp = 20
-btree:run()
+btree1:run()
+
+
+local btree2 = behavior_tree.new(tree_hero, process, hero, ctx)
+
+print "run hero ai"
+btree2:run()
