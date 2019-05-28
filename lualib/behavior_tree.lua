@@ -28,58 +28,70 @@ end
 local mt = {}
 mt.__index = mt
 
-function mt:init(data, process, owner, ctx)
+function mt:init(data, process, owner, ctx, frame)
     self.process = assert(process)  -- 节点定义，参考sample/behaviors.lua
     self.data    = assert(data)     -- 行为树数据，参考data/hero.lua
     self.owner   = owner            -- 拥有者，通常是角色，怪物等对象
     self.ctx     = ctx              -- 上下文，通常是地图，战斗等对象
+    self.frame   = frame            -- 执行频率
 
     self.tree_name = tree_name
     self.vars      = {}
     self.tree_id   = self.data.tree_id
     self.root      = behavior_node.new(self.data, self)
 
-    self.co     = nil -- 行为树执行协程
-    self.action = nil -- 挂起行为
+    self.action = "WAIT" -- 挂起行为
+    self.wait   = 0
+
+    self.co = coroutine.create(function()
+        while true do
+            local ok, err = xpcall(function()
+                self.root:run()
+            end, debug.traceback)
+            if not ok then
+                print(err)
+                return
+            end
+            if self.frame then
+                self:yield("WAIT", self.frame)
+            else
+                self:yield("SLEEP") -- 无限等待直到下次 resume("SLEEP")
+            end
+        end
+    end)
 end
 
-function mt:run()
-    if self.co then
-        local status = coroutine.status(self.co)
-        if status == "suspended" then
-            print("waiting")
+function mt:update()
+    local status = coroutine.status(self.co)
+    if status == "suspended" then
+        print("waiting")
+        if self.action == "SLEEP" or (self.action == "WAIT" and self.ctx.time > self.wait) then
             return
-        elseif status == "running" then
-            error("repeat run")
         end
+    elseif status == "running" then
+        error("repeat run")
     end
-    self.co = coroutine.create(function()
-        self.root:run()
-    end)
-    self:resume()
+
+    self:resume("WAIT")
 end
 
 function mt:resume(action, ...)
-    if self.co then
-        if self.action == action then
-            local ret, new_action = coroutine.resume(self.co, ...)
-            if coroutine.status(self.co) == "suspended" then
-                self.action = new_action
-            else
-                self.action = nil
+    if self.action == action then
+        local ret = {coroutine.resume(self.co, ...)}
+        if coroutine.status(self.co) == "suspended" then
+            self.action = ret[2]
+            if self.action == "WAIT" then
+                local wait = tonumber(ret[3])
+                self.wait = assert(wait, ret[3])
             end
+        else
+            self.action = nil
         end
-    else
-        error("behavior tree not runing")
     end
 end
 
 function mt:yield(action, ...)
-    if self.co then
-        return coroutine.yield(action, ...)
-    else
-        error("behavior tree not runing")
-    end
+    return coroutine.yield(action, ...)
 end
 
 function mt:get_var(key)

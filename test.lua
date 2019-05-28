@@ -32,23 +32,28 @@ function ctx:find(func)
     return list
 end
 
-local btree1 = behavior_tree.new(tree_monster, process, monster, ctx)
+local btree1 = behavior_tree.new(tree_monster, process, monster, ctx, 6)
 
-print "run monster ai"
+print "update monster ai"
 monster.hp = 100
-btree1:run()
+btree1:update()
 
-print "run monster ai"
+print "update monster ai"
 monster.hp = 20
-btree1:run()
+btree1:update()
 
 
 local btree2 = behavior_tree.new(tree_hero, process, hero, ctx)
 
-print "run hero ai"
-btree2:run()
-btree2:run()
-btree2:run()
+print "update hero ai"
+btree2:update()
+btree2:update()
+btree2:update()
 btree2:resume("MOVING")
 btree2:resume("ATTACKING", 9999)
+
+btree2:update()
+ctx.time = 20
+btree2:update()
+
 

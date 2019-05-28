@@ -91,6 +91,9 @@ function M:Attack(enemy)
     local hurt = self.tree:yield("ATTACKING")
     print("Hurt:", hurt)
 
+    self.tree:yield("WAIT", 10)
+    print("Attack finish")
+
     return true
 end
 
