@@ -47,3 +47,8 @@ local btree2 = behavior_tree.new(tree_hero, process, hero, ctx)
 
 print "run hero ai"
 btree2:run()
+btree2:run()
+btree2:run()
+btree2:resume("MOVING")
+btree2:resume("ATTACKING", 9999)
+

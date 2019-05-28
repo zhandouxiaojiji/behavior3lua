@@ -87,6 +87,10 @@ function M:Attack(enemy)
     end
 
     print "Do Attack"
+
+    local hurt = self.tree:yield("ATTACKING")
+    print("Hurt:", hurt)
+
     return true
 end
 
@@ -116,7 +120,7 @@ function M:Idle()
 end
 
 function M:Wait()
-    self:set_var("WAIT", self.ctx.time + self.args.time)
+    os.execute("sleep " .. self.args.time)
     return true
 end
 

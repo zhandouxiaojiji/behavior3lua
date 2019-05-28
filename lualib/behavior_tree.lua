@@ -35,19 +35,47 @@ function mt:init(data, process, owner, ctx)
     self.ctx     = ctx              -- 上下文，通常是地图，战斗等对象
 
     self.tree_name = tree_name
-    self.vars = {}
-    self.tree_id = self.data.tree_id
-    self.root = behavior_node.new(self.data, self)
+    self.vars      = {}
+    self.tree_id   = self.data.tree_id
+    self.root      = behavior_node.new(self.data, self)
+
+    self.co     = nil -- 行为树执行协程
+    self.action = nil -- 挂起行为
 end
 
 function mt:run()
-    local wait = self:get_var("WAIT")
-    if wait and self.ctx:get_time() < wait then
-        return
-    else
-        self:set_var("WAIT", nil)
+    if self.co then
+        local status = coroutine.status(self.co)
+        if status == "suspended" then
+            print("waiting")
+            return
+        elseif status == "running" then
+            error("repeat run")
+        end
     end
-    self.root:run()
+    self.co = coroutine.create(function()
+        self.root:run()
+    end)
+    coroutine.resume(self.co)
+end
+
+function mt:resume(action, ...)
+    if self.co then
+        if self.action == action then
+            coroutine.resume(self.co, ...)
+        end
+    else
+        error("behavior tree not runing")
+    end
+end
+
+function mt:yield(action, ...)
+    if self.co then
+        self.action = action
+        return coroutine.yield(self.co, ...)
+    else
+        error("behavior tree not runing")
+    end
 end
 
 function mt:get_var(key)
