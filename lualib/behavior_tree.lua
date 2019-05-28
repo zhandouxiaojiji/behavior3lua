@@ -56,13 +56,18 @@ function mt:run()
     self.co = coroutine.create(function()
         self.root:run()
     end)
-    coroutine.resume(self.co)
+    self:resume()
 end
 
 function mt:resume(action, ...)
     if self.co then
         if self.action == action then
-            coroutine.resume(self.co, ...)
+            local ret, new_action = coroutine.resume(self.co, ...)
+            if coroutine.status(self.co) == "suspended" then
+                self.action = new_action
+            else
+                self.action = nil
+            end
         end
     else
         error("behavior tree not runing")
@@ -71,8 +76,7 @@ end
 
 function mt:yield(action, ...)
     if self.co then
-        self.action = action
-        return coroutine.yield(self.co, ...)
+        return coroutine.yield(action, ...)
     else
         error("behavior tree not runing")
     end
