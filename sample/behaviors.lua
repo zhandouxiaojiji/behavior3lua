@@ -2,7 +2,7 @@
 
 local M = {}
 -- 选择执行, 执行所有子节点直到返回true
-function M:Or()
+function M:Selector()
     for _, child in ipairs(self.children) do
         if child:run() then
             return true
@@ -12,7 +12,7 @@ function M:Or()
 end
 
 -- 顺序执行, 执行所有子节点直到返回false
-function M:And()
+function M:Sequence()
     for _, child in ipairs(self.children) do
         if not child:run() then
             return false

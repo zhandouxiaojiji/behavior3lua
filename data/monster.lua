@@ -1,9 +1,9 @@
 return {
-  name = [[Or]],
+  name = [[Selector]],
   desc = [[怪物AI]],
   children = {
     {
-      name = [[And]],
+      name = [[Sequence]],
       desc = [[攻击]],
       children = {
         {

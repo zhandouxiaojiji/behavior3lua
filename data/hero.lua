@@ -1,9 +1,9 @@
 return {
-  name = [[Or]],
+  name = [[Selector]],
   desc = [[英雄AI]],
   children = {
     {
-      name = [[And]],
+      name = [[Sequence]],
       desc = [[攻击]],
       children = {
         {
@@ -21,7 +21,7 @@ return {
       },
     },
     {
-      name = [[And]],
+      name = [[Sequence]],
       desc = [[移动]],
       children = {
         {
@@ -38,7 +38,7 @@ return {
       },
     },
     {
-      name = [[And]],
+      name = [[Sequence]],
       desc = [[逃跑]],
       children = {
         {
