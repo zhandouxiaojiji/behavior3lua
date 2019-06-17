@@ -9,6 +9,8 @@ local process = {
     Parallel = require "nodes.composites.parallel",
     Selector = require "nodes.composites.selector",
     Sequence = require "nodes.composites.sequence",
+
+    GetHp = require "nodes.actions.get_hp",
 }
 
 local function new_node(...)
