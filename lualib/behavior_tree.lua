@@ -28,7 +28,6 @@ function mt:init(tree_name)
 end
 
 function mt:run(env)
-    env.close_nodes = env.close_nodes or {}
     local r = self.root:run(env)
     if r ~= behavior_ret.RUNNING then
         env.close_nodes = {}
@@ -44,6 +43,11 @@ end
 
 local M = {}
 function M.new(name, env)
+    env.close_nodes = {}
+    env.open_nodes = {}
+    env.states = {}
+    env.vars = {}
+
     local tree = trees[name] or new_tree(name)
     return {
         tree = tree,

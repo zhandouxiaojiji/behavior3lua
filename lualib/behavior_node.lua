@@ -1,4 +1,4 @@
-local behavior_ret = require "behavior_ret"
+local bret = require "behavior_ret"
 
 local node_id = 1
 
@@ -10,7 +10,12 @@ local process = {
     Selector = require "nodes.composites.selector",
     Sequence = require "nodes.composites.sequence",
 
+    Cmp = require "nodes.conditions.cmp",
+    FindEnemy = require "nodes.conditions.find_enemy",
+
+    Log = require "nodes.actions.log",
     GetHp = require "nodes.actions.get_hp",
+    Attack = require "nodes.actions.attack",
 }
 
 local function new_node(...)
@@ -39,7 +44,7 @@ function mt:run(env)
     print("start", self.name, self.node_id)
     self.env = env
     if self:is_close() then
-        return behavior_ret.CLOSED
+        return bret.CLOSED
     end
     local vars = {}
     for i,v in ipairs(self.data.input or {}) do
@@ -50,23 +55,31 @@ function mt:run(env)
     for i,v in ipairs(self.data.output or {}) do
         self:set_var(v, vars[i+1])
     end
-    if vars[1] ~= behavior_ret.RUNNING then
+    if vars[1] == bret.RUNNING then
+        self:open()
+    else
         self:close()
     end
-    print("fini", self.name, self.node_id)
+    print("fini", self.name, self.node_id, table.unpack(vars))
     return vars[1]
 end
 
 function mt:get_var(key)
-    return self.env[key]
+    return self.env.vars[key]
 end
 
 function mt:set_var(key, value)
-    self.env[key] = value
+    self.env.vars[key] = value
 end
 
 function mt:close()
+    self.env.open_nodes[self.node_id] = nil
     self.env.close_nodes[self.node_id] = true
+end
+
+function mt:open()
+    self.env.open_nodes[self.node_id] = true
+    self.env.close_nodes[self.node_id] = nil
 end
 
 function mt:is_close()
@@ -74,7 +87,7 @@ function mt:is_close()
 end
 
 function mt:is_open()
-    return not self.env.close_nodes[self.node_id]
+    return self.env.open_nodes[self.node_id]
 end
 
 
