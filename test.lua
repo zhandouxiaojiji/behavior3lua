@@ -3,8 +3,6 @@ package.path = package.path .. ';lualib/?.lua'
 local behavior_tree = require "behavior_tree"
 
 local process       = require "sample.behaviors"
-local tree_hero     = require "data.hero"
-local tree_monster  = require "data.monster"
 
 local monster = {
     hp = 100,
@@ -32,28 +30,34 @@ function ctx:find(func)
     return list
 end
 
-local btree1 = behavior_tree.new(tree_monster, process, monster, ctx, 6)
+local btree1 = behavior_tree.new("monster", {
+    ctx   = ctx,
+    owner = monster,
+})
 
-print "update monster ai"
+print "run monster ai"
 monster.hp = 100
-btree1:update()
+btree1:run()
 
-print "update monster ai"
+print "run monster ai"
 monster.hp = 20
-btree1:update()
+btree1:run()
 
 
-local btree2 = behavior_tree.new(tree_hero, process, hero, ctx)
+local btree2 = behavior_tree.new("hero", {
+    ctx   = ctx,
+    owner = hero,
+})
 
-print "update hero ai"
-btree2:update()
-btree2:update()
-btree2:update()
-btree2:resume("MOVING")
-btree2:resume("ATTACKING", 9999)
+print "run hero ai"
+btree2:run()
+btree2:run()
+btree2:run()
+--btree2:resume("MOVING")
+--btree2:resume("ATTACKING", 9999)
 
-btree2:update()
+btree2:run()
 ctx.time = 20
-btree2:update()
+btree2:run()
 
 
