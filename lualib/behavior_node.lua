@@ -1,21 +1,28 @@
 local bret = require "behavior_ret"
 
+local sformat = string.format
 local node_id = 1
 
 local mt = {}
 mt.__index = mt
 
 local process = {
+    -- 复合节点
     Parallel = require "nodes.composites.parallel",
     Selector = require "nodes.composites.selector",
     Sequence = require "nodes.composites.sequence",
 
-    Cmp = require "nodes.conditions.cmp",
+    -- 条件节点
+    Cmp       = require "nodes.conditions.cmp",
     FindEnemy = require "nodes.conditions.find_enemy",
 
-    Log = require "nodes.actions.log",
-    GetHp = require "nodes.actions.get_hp",
-    Attack = require "nodes.actions.attack",
+    -- 行为节点
+    Log          = require "nodes.actions.log",
+    GetHp        = require "nodes.actions.get_hp",
+    Attack       = require "nodes.actions.attack",
+    MoveToTarget = require "nodes.actions.move_to_target",
+    Idle         = require "nodes.actions.idle",
+    Wait         = require "nodes.actions.wait",
 }
 
 local function new_node(...)
@@ -52,6 +59,7 @@ function mt:run(env)
     end
     local func = assert(process[self.name], self.name)
     vars = table.pack(func(self, table.unpack(vars)))
+    assert(vars[1], sformat("node %s return nil", self.name))
     for i,v in ipairs(self.data.output or {}) do
         self:set_var(v, vars[i+1])
     end

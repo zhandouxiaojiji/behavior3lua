@@ -6,7 +6,7 @@ local process       = require "sample.behaviors"
 
 local monster = {
     hp = 100,
-    x = 5,
+    x = 200,
     y = 0,
 }
 
@@ -53,8 +53,8 @@ print "run hero ai"
 btree2:run()
 btree2:run()
 btree2:run()
---btree2:resume("MOVING")
---btree2:resume("ATTACKING", 9999)
+btree2:run()
+btree2:run()
 
 btree2:run()
 ctx.time = 20
