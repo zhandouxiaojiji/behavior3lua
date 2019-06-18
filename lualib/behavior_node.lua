@@ -12,6 +12,11 @@ local process = {
     Selector = require "nodes.composites.selector",
     Sequence = require "nodes.composites.sequence",
 
+    -- 装饰节点
+    Not           = require "nodes.decorators.not",
+    AlwaysFail    = require "nodes.decorators.always_fail",
+    AlwaysSuccess = require "nodes.decorators.always_success",
+
     -- 条件节点
     Cmp       = require "nodes.conditions.cmp",
     FindEnemy = require "nodes.conditions.find_enemy",

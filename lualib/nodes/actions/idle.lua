@@ -1,4 +1,4 @@
--- Attack
+-- Idle
 --
 
 local bret = require "behavior_ret"

@@ -1,4 +1,4 @@
--- MoveToTarget
+-- Wait
 --
 
 local bret = require "behavior_ret"
