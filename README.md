@@ -72,6 +72,7 @@ end
 + 给所有过行过的节点标记为CLOSED
 + 如果根节点返回RUNNING，表示有节点正在执行，否则清除所有CLOSED标记，下次tick重头开始执行。
 ![](image/running.png)
+
 如图，第一次tick在Wait返回了RUNNING，其间FindEnemy和Attack被标记为了CLOSED，第二次tick的时候，Sequence会忽略掉CLOSED的节点，就相当于第二次tick是从Wait开始执行的。
 
 ## 编辑器
