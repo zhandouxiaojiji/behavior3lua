@@ -18,6 +18,11 @@ return {
           input = {"enemy",},
           args = {skillid = 101,},
         },
+        {
+          name = [[Wait]],
+          desc = [[后摇]],
+          args = {time = 10,},
+        },
       },
     },
     {

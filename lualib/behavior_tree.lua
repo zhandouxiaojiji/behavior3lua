@@ -20,20 +20,19 @@ local trees = {}
 
 local mt = {}
 mt.__index = mt
-function mt:init(tree_name)
-    self.tree_name = tree_name
+function mt:init(name)
+    self.name = name
 
-    local data = const(require("data."..tree_name))
+    local data = const(require("data."..name))
     self.root = behavior_node.new(data)
 end
 
 function mt:run(env)
-    print("==============================")
+    print("====="..self.name.." tick=====")
     local r = self.root:run(env)
     if r ~= behavior_ret.RUNNING then
         env.close_nodes = {}
     end
-    print("==============================")
 end
 
 local function new_tree(name)

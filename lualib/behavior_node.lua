@@ -48,7 +48,7 @@ function mt:init(node_data)
 end
 
 function mt:run(env)
-    print("start", self.name, self.node_id)
+    --print("start", self.name, self.node_id)
     self.env = env
     if self:is_close() then
         return bret.CLOSED
@@ -68,7 +68,7 @@ function mt:run(env)
     else
         self:close()
     end
-    print("fini", self.name, self.node_id, table.unpack(vars))
+    --print("fini", self.name, self.node_id, table.unpack(vars))
     return vars[1]
 end
 

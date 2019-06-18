@@ -30,34 +30,40 @@ function ctx:find(func)
     return list
 end
 
-local btree1 = behavior_tree.new("monster", {
-    ctx   = ctx,
-    owner = monster,
-})
 
-print "run monster ai"
-monster.hp = 100
-btree1:run()
+local function test_moster()
+    local btree = behavior_tree.new("monster", {
+        ctx   = ctx,
+        owner = monster,
+    })
 
-print "run monster ai"
-monster.hp = 20
-btree1:run()
+    monster.hp = 100
+    btree:run()
 
-
-local btree2 = behavior_tree.new("hero", {
-    ctx   = ctx,
-    owner = hero,
-})
-
-print "run hero ai"
-btree2:run()
-btree2:run()
-btree2:run()
-btree2:run()
-btree2:run()
-
-btree2:run()
-ctx.time = 20
-btree2:run()
+    monster.hp = 20
+    btree:run()
+end
 
 
+local function test_hero()
+    local btree = behavior_tree.new("hero", {
+        ctx   = ctx,
+        owner = hero,
+    })
+
+    -- 移动到目标并攻击
+    btree:run()
+    btree:run()
+    btree:run()
+    btree:run()
+    btree:run()
+    btree:run()
+
+    -- 后摇
+    btree:run()
+    btree:run()
+    ctx.time = 20
+    btree:run()
+end
+
+test_hero()

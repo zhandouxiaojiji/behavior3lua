@@ -11,10 +11,15 @@ return function(node)
     local env = node.env
     if node:is_open() then
         local t = node:get_var("WAITING")
-        if env.time >= t then
+        if env.ctx.time >= t then
+            print("CONTINUE")
             return bret.SUCCESS
+        else
+            print("WAITING")
+            return bret.RUNNING
         end
     end
-    node:set_var("WAITING", env.time + args.time)
+    print("Wait", args.time)
+    node:set_var("WAITING", env.ctx.time + args.time)
     return bret.RUNNING
 end

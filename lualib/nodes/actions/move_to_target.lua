@@ -3,7 +3,9 @@
 
 local bret = require "behavior_ret"
 
-local abs = math.abs
+local abs     = math.abs
+local sformat = string.format
+
 local SPEED = 50
 
 return function(node, target)
@@ -17,10 +19,11 @@ return function(node, target)
     local tx, ty = target.x, target.y
 
     if abs(x - tx) < SPEED and abs(y - ty) < SPEED  then
+        print("Moving reach target")
         return bret.SUCCESS
     end
 
-    print("Moving", abs(x - tx), abs(y - ty), x, y)
+    print(sformat("Moving (%d, %d) => (%d, %d)", x, y, tx, ty))
 
     if abs(x - tx) >= SPEED then
         owner.x = owner.x + SPEED * (tx > x and 1 or -1)
