@@ -4,7 +4,7 @@
 local bret = require "behavior_ret"
 
 return function(node)
-    for _, child in pairs(node.children) do
+    for _, child in ipairs(node.children) do
         local r = child:run(node.env)
         if r == bret.RUNNING or r == bret.SUCCESS then
             return r
