@@ -3,10 +3,19 @@
 
 local bret = require "behavior_ret"
 
+local M = {
+    name = "Wait",
+    type = "Action",
+    desc = "等待",
+    args = {
+        {"time", "int", "时间/tick"},
+    },
+}
+
 local abs = math.abs
 local SPEED = 50
 
-return function(node)
+function M.run(node)
     local args = node.args
     local env = node.env
     if node:is_open() then
@@ -23,3 +32,5 @@ return function(node)
     node:set_var("WAITING", env.ctx.time + args.time)
     return bret.RUNNING
 end
+
+return M

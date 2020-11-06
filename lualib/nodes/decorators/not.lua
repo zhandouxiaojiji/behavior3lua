@@ -1,9 +1,18 @@
 -- Not
 --
 
-local bret = require "behavior_ret"
+local bret = require 'behavior_ret'
 
-return function(node, enemy)
+local M = {
+    name = 'Not',
+    type = 'Decorator',
+    desc = '取反',
+    doc = [[
+        + 将子节点的返回值取反
+    ]]
+}
+
+function M.run(node, enemy)
     local r = node.children[1]:run(node.env)
     if r == bret.SUCCESS then
         return bret.FAIL
@@ -13,3 +22,5 @@ return function(node, enemy)
     end
     return r
 end
+
+return M

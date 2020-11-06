@@ -2,11 +2,28 @@
 
 local bret = require "behavior_ret"
 
+local M = {
+    name = "FindEnemy",
+    type = "Condition",
+    desc = "查找敌人",
+    args = {
+        {"x",     "int?",     "x"},
+        {"y",     "int?",     "y"},
+        {"w",     "int?",     "宽"},
+        {"h",     "int?",     "高"},
+        {"count", "string?",  "查找上限"},
+    },
+    output = {"目标单位"},
+    doc = [[
+        + 没找到返回失败
+    ]]
+}
+
 local function ret(r)
     return r and bret.SUCCESS or bret.FAIL
 end
 
-return function(node, value)
+function M.run(node, value)
     local env = node.env
     local args = node.args
     local x, y = env.owner.x, env.owner.y
@@ -22,3 +39,5 @@ return function(node, value)
     local enemy = list[1]
     return ret(enemy), enemy
 end
+
+return M

@@ -62,7 +62,7 @@ function mt:run(env)
     for i,v in ipairs(self.data.input or {}) do
         vars[i] = self:get_var(v)
     end
-    local func = assert(process[self.name], self.name)
+    local func = assert(process[self.name].run, self.name)
     vars = table.pack(func(self, table.unpack(vars)))
     assert(vars[1], sformat("node %s return nil", self.name))
     for i,v in ipairs(self.data.output or {}) do

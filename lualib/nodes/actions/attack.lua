@@ -2,8 +2,14 @@
 --
 
 local bret = require "behavior_ret"
+local M = {
+    name = "Attack",
+    type = "Action",
+    desc = "攻击",
+    input = {"{目标}"},
+}
 
-return function(node, enemy)
+function M.run(node, enemy)
     if not enemy then
         return bret.FAIL
     end
@@ -17,3 +23,5 @@ return function(node, enemy)
 
     return bret.SUCCESS
 end
+
+return M

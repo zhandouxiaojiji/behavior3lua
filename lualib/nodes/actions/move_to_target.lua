@@ -3,12 +3,19 @@
 
 local bret = require "behavior_ret"
 
+local M = {
+    name = "MoveToTarget",
+    type = "Action",
+    desc = "移动到目标",
+    input = {"{目标}"},
+}
+
 local abs     = math.abs
 local sformat = string.format
 
 local SPEED = 50
 
-return function(node, target)
+function M.run(node, target)
     if not target then
         return bret.FAIL
     end
@@ -35,3 +42,5 @@ return function(node, target)
 
     return bret.RUNNING
 end
+
+return M

@@ -1,13 +1,32 @@
 -- Cmp
 
-local bret = require "behavior_ret"
+local bret = require 'behavior_ret'
+
+local M = {
+    name = 'Cmp',
+    type = 'Condition',
+    desc = '比较值大小',
+    args = {
+        {'value', 'lua?', '值'},
+        {'gt', 'int?', '>'},
+        {'ge', 'int?', '>='},
+        {'eq', 'int?', '=='},
+        {'le', 'int?', '<='},
+        {'lt', 'int?', '<'}
+    },
+    input = {'值(int)'},
+    doc = [[
+        + 若值为空，返回失败
+        + 非整数类型可能会报错
+    ]]
+}
 
 local function ret(r)
     return r and bret.SUCCESS or bret.FAIL
 end
 
-return function(node, value)
-    assert(type(value) == "number")
+function M.run(node, value)
+    assert(type(value) == 'number')
     local args = node.args
     if args.gt then
         return ret(value > args.gt)
@@ -20,6 +39,8 @@ return function(node, value)
     elseif args.le then
         return ret(value <= args.le)
     else
-        error("args error")
+        error('args error')
     end
 end
+
+return M
