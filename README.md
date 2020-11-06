@@ -76,12 +76,13 @@ end
 如图，第一次tick在Wait返回了RUNNING，其间FindEnemy和Attack被标记为了CLOSED，第二次tick的时候，Sequence会忽略掉CLOSED的节点，就相当于第二次tick是从Wait开始执行的。
 
 ## 编辑器
+我用阿里的g6图形库开发了一个通用的行为树编辑器，并用electron打包成exe版本，目前还比较简陋，感兴趣的同学可以关注一下 [behavior3editor](https://github.com/zhandouxiaojiji/behavior3editor)
 ![](readme/editor.png)
 
 ## 运行测试用例
-+ 导出行为树
++ 导出节点定义
 ```
-lua export.lua tree/monster.mm data/monster.lua
+lua export_node.lua
 ```
 + 运行测试
 ```
@@ -90,9 +91,6 @@ lua test.lua
 
 ## 调试方案
 我以前的做法是，把每一tick所有的节点执行结果都发给编辑器然后在编辑器上展示，非常详细，但实际应用却很鸡肋，太多冗余的数据让人眼花缭乱。我目前的做法是在编辑行为树的时候，把需要调试的节点打上标志，当行为树运行到这个节点的时候，打印这个节点相关的日志，比如时间/帧数，执行结果，及所有变量的值。
-
-## TODO
-计划使用antd来为这套方案做一个网页版的行为树编辑器，准备做的通用点，导出json之类的格式，带调试功能，不过我前端渣渣，不知道能不能捣鼓出来。ps:最近antd-pro出了个思维导图插件，感觉能用的上。。。
 
 ## About
 这套方案我已经在好几个项目中使用过，动作，卡牌，MOBA，MMO类都有，提供三四十种节点，基本上策划可以自己配置出一套很复杂的AI，当然还可以使用在技能系统之类的，需要更直观的逻辑表现的系统。这仅仅是一种思路，各位路过的大神，有啥建议或看法，欢迎Issue。
