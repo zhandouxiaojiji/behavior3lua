@@ -65,3 +65,4 @@ local function test_hero()
 end
 
 test_hero()
+test_moster()

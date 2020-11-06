@@ -5,7 +5,7 @@
 
 ## 基本概念
 #### 节点数据结构
-```
+```lua
 {
     name = 'find_enemy',        -- 节点名称
     desc = '查找敌人'，          -- 说明
@@ -21,7 +21,7 @@
 因为节点之间都有相互的影响，比如这个节点可能会用到上一个节点所产生的数据，所以大多数行为树设计者都提供一个数据结构来记录行为树的运行状态，称之为“黑板”。
 
 我偷换了个概念，把节点当成一个function来执行，如上面一个节点定义的input={'var1', 'var2'}意思是在执行节点前从黑板里把var1和var2这两个变量取出来，作为参数传进去，在节点执行完后把结果返回，写到target这个变量上。整个过程就像下面这段伪代码：
-```
+```lua
 function find_enemy(var1, var2)
     local w, h = args.w, args.h
     // do find enemy in range w, h
@@ -30,7 +30,7 @@ function find_enemy(var1, var2)
 end
 ```
 上面这个节点执行完，黑板上target这个变量就写上了查找到的目标，而后面的节点就可以使用target这个变量作为input了。
-```
+```lua
 {
     name = 'attack',
     desc = '攻击敌人',
@@ -71,54 +71,12 @@ end
 + 只要是有任意子节点返回的是RUNNING, 立即返回RUNNING。
 + 给所有过行过的节点标记为CLOSED
 + 如果根节点返回RUNNING，表示有节点正在执行，否则清除所有CLOSED标记，下次tick重头开始执行。
-![](image/running.png)
+![](readme/running.png)
 
 如图，第一次tick在Wait返回了RUNNING，其间FindEnemy和Attack被标记为了CLOSED，第二次tick的时候，Sequence会忽略掉CLOSED的节点，就相当于第二次tick是从Wait开始执行的。
 
 ## 编辑器
-+ 专门写编辑器成本太高，我现在使用Freemind这款思维导图软件作为我们的编辑器，按照约定的格式画好，保存成xml格式，再转换成项目使用的格式。
-
-![](image/monster.png)
-
-导出lua格式:
-```
-return {
-  name = [[Selector]],
-  desc = [[怪物AI]],
-  children = {
-    {
-      name = [[Sequence]],
-      desc = [[攻击]],
-      children = {
-        {
-          name = [[GetHp]],
-          desc = [[获取血量]],
-          output = {"hp",},
-        },
-        {
-          name = [[Cmp]],
-          desc = [[大于50]],
-          input = {"hp",},
-          args = {ge = 50,},
-        },
-        {
-          name = [[Log]],
-          desc = [[进攻]],
-          args = {str="Attack!",},
-        },
-      },
-    },
-    {
-      name = [[Log]],
-      desc = [[逃跑]],
-      args = {str="Run!",},
-    },
-  },
-}
-```
-
-+ N年前用Unity扩展写过一个行为树编辑器，功能比较强大，还能调试。这个代码就不开源了，因为unity版本太低，跟项目耦合太多，没法单独使用。我还写过一篇类似文档的东西，可以参考一下。[Moba游戏AI设计文档](Moba.md)
-![](image/moba8.png)
+![](readme/editor.png)
 
 ## 运行测试用例
 + 导出行为树

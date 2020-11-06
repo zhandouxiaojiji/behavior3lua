@@ -1,5 +1,6 @@
 local behavior_node = require "behavior_node"
 local behavior_ret  = require "behavior_ret"
+local json = require "json"
 
 local meta = {
     __newindex = function(_, k)
@@ -23,8 +24,10 @@ mt.__index = mt
 function mt:init(name)
     self.name = name
 
-    local data = const(require("data."..name))
-    self.root = behavior_node.new(data)
+    local file = io.open('./tree/'..name..'.json', 'r')
+    local str = file:read("*a")
+    local data = const(json.decode(str))
+    self.root = behavior_node.new(data.root)
 end
 
 function mt:run(env)
