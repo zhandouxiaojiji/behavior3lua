@@ -12,15 +12,21 @@ local M = {
     ]]
 }
 
-function M.run(node, enemy)
-    local r = node.children[1]:run(node.env)
+function M.run(node, env)
+    local yield = node:resume(env)
+    if node:resume(env) then
+        r = env.last_ret
+    else
+        r = node.children[1]:run(env)
+    end
+
     if r == bret.SUCCESS then
         return bret.FAIL
-    end
-    if r == bret.FAIL then
+    elseif r == bret.FAIL then
         return bret.SUCCESS
+    elseif r == bret.RUNNING then
+        return node:yield(env)
     end
-    return r
 end
 
 return M

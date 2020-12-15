@@ -9,7 +9,7 @@ local M = {
     desc = "待机",
 }
 
-function M.run(node, enemy)
+function M.run(node, env)
     print "Do Idle"
     return bret.SUCCESS
 end

@@ -25,7 +25,7 @@ local function ret(r)
     return r and bret.SUCCESS or bret.FAIL
 end
 
-function M.run(node, value)
+function M.run(node, env, value)
     assert(type(value) == 'number')
     local args = node.args
     if args.gt then

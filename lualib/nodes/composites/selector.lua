@@ -12,10 +12,27 @@ local M = {
         + 子节点是或的关系
     ]]
 }
-function M.run(node)
-    for _, child in ipairs(node.children) do
-        local r = child:run(node.env)
-        if r == bret.RUNNING or r == bret.SUCCESS then
+function M.run(node, env)
+    local last_idx, last_ret = node:resume(env)
+    if last_idx then
+        if last_ret == bret.SUCCESS or last_ret == bret.RUNNING then
+            return last_ret
+        elseif last_ret == bret.FAIL then
+            last_idx = last_idx + 1
+        else
+            error('wrong ret')
+        end
+    else
+        last_idx = 1
+    end
+
+    for i = last_idx, #node.children do
+        local child = node.children[i]
+        local r = child:run(env)
+        if r == bret.RUNNING then
+            return node:yield(env, i)
+        end
+        if r == bret.SUCCESS then
             return r
         end
     end

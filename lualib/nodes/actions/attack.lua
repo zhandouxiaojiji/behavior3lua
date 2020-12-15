@@ -9,11 +9,10 @@ local M = {
     input = {"{目标}"},
 }
 
-function M.run(node, enemy)
+function M.run(node, env, enemy)
     if not enemy then
         return bret.FAIL
     end
-    local env = node.env
     local owner = env.owner
 
     print "Do Attack"

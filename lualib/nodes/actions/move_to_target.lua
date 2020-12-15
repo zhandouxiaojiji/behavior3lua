@@ -15,11 +15,10 @@ local sformat = string.format
 
 local SPEED = 50
 
-function M.run(node, target)
+function M.run(node, env, target)
     if not target then
         return bret.FAIL
     end
-    local env = node.env
     local owner = env.owner
 
     local x, y = owner.x, owner.y
@@ -40,7 +39,7 @@ function M.run(node, target)
         owner.y = owner.y + SPEED * (ty > y and 1 or -1)
     end
 
-    return bret.RUNNING
+    return node:yield(env)
 end
 
 return M

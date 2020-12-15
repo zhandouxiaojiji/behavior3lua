@@ -12,7 +12,7 @@ local M = {
     },
 }
 
-function M.run(node)
+function M.run(node, env)
     print(node.args.str)
     return bret.SUCCESS
 end

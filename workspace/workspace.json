@@ -1,0 +1,5 @@
+{
+  "isRelative": true,
+  "nodeConfPath": "node-config.json",
+  "workdir": "trees"
+}

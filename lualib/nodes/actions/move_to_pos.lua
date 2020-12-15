@@ -10,9 +10,8 @@ local M = {
     }
 }
 
-function M.run(node)
+function M.run(node, env)
     local args = node.args
-    local env = node.env
     local owner = env.owner
     owner.x = args.x
     owner.y = args.y

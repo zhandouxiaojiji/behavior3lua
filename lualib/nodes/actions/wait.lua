@@ -1,36 +1,34 @@
 -- Wait
 --
 
-local bret = require "behavior_ret"
+local bret = require 'behavior_ret'
 
 local M = {
-    name = "Wait",
-    type = "Action",
-    desc = "等待",
+    name = 'Wait',
+    type = 'Action',
+    desc = '等待',
     args = {
-        {"time", "int", "时间/tick"},
-    },
+        {'time', 'int', '时间/tick'}
+    }
 }
 
 local abs = math.abs
 local SPEED = 50
 
-function M.run(node)
+function M.run(node, env)
     local args = node.args
-    local env = node.env
-    if node:is_open() then
-        local t = node:get_var("WAITING")
+    local t = node:resume(env)
+    if t then
         if env.ctx.time >= t then
-            print("CONTINUE")
+            print('CONTINUE')
             return bret.SUCCESS
         else
-            print("WAITING")
+            print('WAITING')
             return bret.RUNNING
         end
     end
-    print("Wait", args.time)
-    node:set_var("WAITING", env.ctx.time + args.time)
-    return bret.RUNNING
+    print('Wait', args.time)
+    return node:yield(env, env.ctx.time + args.time)
 end
 
 return M

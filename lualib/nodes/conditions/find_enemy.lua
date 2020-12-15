@@ -23,8 +23,7 @@ local function ret(r)
     return r and bret.SUCCESS or bret.FAIL
 end
 
-function M.run(node, value)
-    local env = node.env
+function M.run(node, env)
     local args = node.args
     local x, y = env.owner.x, env.owner.y
     local w, h = args.w, args.h
