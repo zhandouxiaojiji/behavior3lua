@@ -42,7 +42,6 @@ end
 + SUCCESS 成功
 + FAIL 失败
 + RUNNING 正在运行
-+ CLOSED 已经运行过
 
 ## 复合节点
 + Parallel 并行执行, 执行所有子节点并反回true
@@ -67,13 +66,10 @@ end
 + get_var 获取变量
 
 ## Running状态
-做行为树始终绕不开一个问题，就是running状态，如果一套行为树方案没有running状态，那它只能用来做决策树，而不能做持续动作。要想实现running状态，关键是如何用上一次运行的节点恢复起来。其实对复合节点稍做改造即可实现：
+做行为树始终绕不开一个问题，就是running状态，如果一套行为树方案没有running状态，那它只能用来做决策树，而不能做持续动作。要想实现running状态，关键是如何用上一次运行的节点恢复起来。行为树的节点调用很像程序的调用栈，其实对复合节点稍做改造即可实现：
 + 只要是有任意子节点返回的是RUNNING, 立即返回RUNNING。
-+ 给所有过行过的节点标记为CLOSED
-+ 如果根节点返回RUNNING，表示有节点正在执行，否则清除所有CLOSED标记，下次tick重头开始执行。
++ 运行节点前把节点压入栈，如果该节点返回RUNNING，则中断执行，等待下次tick唤醒，如果返回的是SUCCESS或FAIL，则出栈，继续往下执行。
 ![](readme/running.png)
-
-如图，第一次tick在Wait返回了RUNNING，其间FindEnemy和Attack被标记为了CLOSED，第二次tick的时候，Sequence会忽略掉CLOSED的节点，就相当于第二次tick是从Wait开始执行的。
 
 ## 编辑器
 我用阿里的g6图形库开发了一个通用的行为树编辑器，并用electron打包成exe版本，目前还比较简陋，感兴趣的同学可以关注一下 [behavior3editor](https://github.com/zhandouxiaojiji/behavior3editor)
