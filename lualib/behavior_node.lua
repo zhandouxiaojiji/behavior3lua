@@ -3,6 +3,7 @@ local process = require 'process'
 
 local sformat = string.format
 local table = table
+local print = print
 
 local mt = {}
 mt.__index = mt
@@ -50,6 +51,15 @@ function mt:run(env)
     end
     env.last_ret = ret
     --print("fini", self.name, self.node_id, table.unpack(vars))
+
+    if self.data.debug then
+        local var_str = ''
+        for k, v in pairs(env.vars) do
+            var_str = sformat("[%s]=%s,", k, v)
+        end
+        print(sformat("[DEBUG] btree:%s, node:%s, ret:%s vars:{%s}",
+        self.tree.name, self.id, ret, var_str))
+    end
     return ret
 end
 
