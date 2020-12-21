@@ -59,6 +59,7 @@ local function test_hero()
 
     -- 后摇
     btree:run()
+    btree:interrupt()
     btree:run()
     ctx.time = 20
     btree:run()

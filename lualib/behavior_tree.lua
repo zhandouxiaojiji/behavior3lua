@@ -48,6 +48,13 @@ function mt:run(env)
     self.tick = self.tick + 1
 end
 
+function mt:interrupt(env)
+    if #env.stack > 0 then
+        env.inner_vars = {}
+        env.stack = {}
+    end
+end
+
 local function new_tree(name)
     local tree = setmetatable({}, mt)
     tree:init(name)
@@ -97,7 +104,10 @@ function M.new(name, env_params)
         tree = tree,
         run = function()
             tree:run(env)
-        end
+        end,
+        interrupt = function()
+            tree:interrupt(env)
+        end,
     }
 end
 return M
