@@ -1,4 +1,4 @@
-local bret = require 'behavior_ret'
+local bret = require 'behavior3.behavior_ret'
 
 local M = {
     name = 'MoveToPos',
