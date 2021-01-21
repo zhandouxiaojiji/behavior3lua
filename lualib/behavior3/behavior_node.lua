@@ -1,5 +1,5 @@
-local bret = require 'behavior_ret'
-local process = require 'process'
+local bret = require 'behavior3.behavior_ret'
+local process = require 'behavior3.process'
 
 local sformat = string.format
 local table = table

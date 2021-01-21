@@ -1,6 +1,6 @@
 package.path = package.path .. ';lualib/?.lua'
 
-local behavior_tree = require "behavior_tree"
+local behavior_tree = require "behavior3.behavior_tree"
 
 local monster = {
     hp = 100,

@@ -1,7 +1,7 @@
 package.path = package.path .. ';lualib/?.lua'
 
-local json = require "json"
-local process = require "process"
+local json = require "behavior3.json"
+local process = require "behavior3.process"
 
 local nodes = {}
 for k, v in pairs(process) do  
