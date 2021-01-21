@@ -1,5 +1,5 @@
 local bret = require 'behavior3.behavior_ret'
-local process = require 'behavior3.process'
+local process = require 'behavior3.sample_process'
 
 local sformat = string.format
 local table = table
@@ -75,5 +75,8 @@ end
 local M = {}
 function M.new(...)
     return new_node(...)
+end
+function M.process(custom)
+    process = custom
 end
 return M

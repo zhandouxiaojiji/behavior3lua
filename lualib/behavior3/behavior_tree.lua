@@ -34,7 +34,7 @@ function mt:init(name, path)
 end
 
 function mt:run(env)
-    print(string.format('===== tree:%s, tick:%s, stack:%d =====', self.name, self.tick, #env.stack))
+    -- print(string.format('===== tree:%s, tick:%s, stack:%d =====', self.name, self.tick, #env.stack))
     if #env.stack > 0 then
         local last_node = env.stack[#env.stack]
         while last_node do

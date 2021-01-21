@@ -1,7 +1,7 @@
 package.path = package.path .. ';lualib/?.lua'
 
-local json = require "behavior3.json"
-local process = require "behavior3.process"
+local json = require "json"
+local process = require "example.process"
 
 local nodes = {}
 for k, v in pairs(process) do  
@@ -40,7 +40,7 @@ end)
 local str = json.encode(nodes)
 print(str)
 
-local path = "node-config.json"
+local path = "workspace/node-config.json"
 local file = io.open(path, "w")
 file:write(str)
 file:close()

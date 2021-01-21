@@ -1,6 +1,8 @@
 package.path = package.path .. ';lualib/?.lua'
 
 local behavior_tree = require "behavior3.behavior_tree"
+local behavior_node = require "behavior3.behavior_node"
+behavior_node.process(require "example.process")
 
 local monster = {
     hp = 100,
