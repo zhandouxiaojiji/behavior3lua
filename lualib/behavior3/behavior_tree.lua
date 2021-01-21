@@ -21,11 +21,13 @@ local trees = {}
 
 local mt = {}
 mt.__index = mt
-function mt:init(name)
+function mt:init(name, path)
+    path = path or './workspace/trees/'
+
     self.name = name
     self.tick = 0
-
-    local file = io.open('./workspace/trees/' .. name .. '.json', 'r')
+    local file, err = io.open(string.format("%s%s%s", path, name, '.json'), 'r')
+    assert(file, err)
     local str = file:read('*a')
     local data = const(json.decode(str))
     self.root = behavior_node.new(data.root, self)
