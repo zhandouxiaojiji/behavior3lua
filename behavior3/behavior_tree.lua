@@ -21,15 +21,11 @@ local trees = {}
 
 local mt = {}
 mt.__index = mt
-function mt:init(name, path)
-    path = path or './workspace/trees/'
+function mt:init(name, tree_data)
 
     self.name = name
     self.tick = 0
-    local file, err = io.open(string.format("%s%s%s", path, name, '.json'), 'r')
-    assert(file, err)
-    local str = file:read('*a')
-    local data = const(json.decode(str))
+    local data = const(tree_data)
     self.root = behavior_node.new(data.root, self)
 end
 
@@ -57,9 +53,9 @@ function mt:interrupt(env)
     end
 end
 
-local function new_tree(name)
+local function new_tree(name, tree_data)
     local tree = setmetatable({}, mt)
-    tree:init(name)
+    tree:init(name, tree_data)
     trees[name] = tree
     return tree
 end
@@ -99,9 +95,9 @@ local function new_env(params)
 end
 
 local M = {}
-function M.new(name, env_params)
+function M.new(name, tree_data, env_params)
     local env = new_env(env_params)
-    local tree = trees[name] or new_tree(name)
+    local tree = trees[name] or new_tree(name, tree_data)
     return {
         tree = tree,
         run = function()
