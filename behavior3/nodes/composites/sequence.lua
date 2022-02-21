@@ -17,7 +17,7 @@ function M.run(node, env)
     local last_idx, last_ret = node:resume(env)
     if last_idx then
         -- print("last", last_idx, last_ret)
-        if last_ret == bret.FAIL or bret.RUNNING then
+        if last_ret == bret.FAIL or last_ret == bret.RUNNING then
             return last_ret
         elseif last_ret == bret.SUCCESS then
             last_idx = last_idx + 1
