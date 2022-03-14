@@ -24,7 +24,7 @@ function M.run(node, env)
 
     local r = node.children[1]:run(env)
     if r == bret.RUNNING then
-        return node:yeild(env)
+        return node:yield(env)
     end
     return bret.SUCCESS
 end

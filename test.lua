@@ -39,21 +39,8 @@ function ctx:find(func)
     return list
 end
 
-local function test_moster()
-    local btree = behavior_tree.new("monster", load_tree("workspace/trees/monster.json"), {
-        ctx   = ctx,
-        owner = monster,
-    })
-
-    monster.hp = 100
-    btree:run()
-
-    monster.hp = 20
-    btree:run()
-end
-
-
 local function test_hero()
+    print("=================== test hero ========================")
     local btree = behavior_tree.new("hero", load_tree("workspace/trees/hero.json"), {
         ctx   = ctx,
         owner = hero,
@@ -76,4 +63,23 @@ local function test_hero()
 end
 
 test_hero()
+
+
+local function test_moster()
+    print("=================== test monster ========================")
+    local btree = behavior_tree.new("monster", load_tree("workspace/trees/monster.json"), {
+        ctx   = ctx,
+        owner = monster,
+    })
+
+    monster.hp = 100
+    btree:run()
+
+    monster.hp = 20
+    btree:run()
+    ctx.time = 40
+    btree:run()
+    btree:run()
+end
+
 test_moster()
