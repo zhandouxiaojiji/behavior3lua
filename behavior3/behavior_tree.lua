@@ -106,6 +106,12 @@ function M.new(name, tree_data, env_params)
         interrupt = function()
             tree:interrupt(env)
         end,
+        is_running = function ()
+            return #env.stack > 0
+        end,
+        set_env = function (_, k, v)
+            env[k] = v
+        end
     }
 end
 return M
