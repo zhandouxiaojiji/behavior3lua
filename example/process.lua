@@ -4,6 +4,8 @@ return {
     Selector = require "behavior3.nodes.composites.selector",
     Sequence = require "behavior3.nodes.composites.sequence",
     IfElse   = require "behavior3.nodes.composites.ifelse",
+    ForEach  = require "behavior3.nodes.composites.foreach",
+    Loop     = require "behavior3.nodes.composites.loop",
 
     -- 装饰节点
     Not           = require "behavior3.nodes.decorators.not",
