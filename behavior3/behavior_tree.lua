@@ -65,10 +65,15 @@ local function new_env(params)
         inner_vars = {}, -- [k.."_"..node.id] => vars
         vars = {},
         stack = {},
-        last_ret = nil
+        last_ret = nil,
+        process = nil,
     }
     for k, v in pairs(params) do
         env[k] = v
+    end
+
+    if not env.process then
+        env.process = require('behavior3.sample_process')
     end
 
     function env:get_var(k)

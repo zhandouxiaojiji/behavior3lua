@@ -1,7 +1,6 @@
 
 local behavior_tree = require "behavior3.behavior_tree"
 local behavior_node = require "behavior3.behavior_node"
-behavior_node.process(require "example.process")
 
 local json = require "json"
 
@@ -44,6 +43,7 @@ local function test_hero()
     local btree = behavior_tree.new("hero", load_tree("workspace/trees/hero.json"), {
         ctx   = ctx,
         owner = hero,
+        process = require("example.process"),
     })
 
     -- 移动到目标并攻击
@@ -70,6 +70,7 @@ local function test_moster()
     local btree = behavior_tree.new("monster", load_tree("workspace/trees/monster.json"), {
         ctx   = ctx,
         owner = monster,
+        process = require("example.process"),
     })
 
     monster.hp = 100

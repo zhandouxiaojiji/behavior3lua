@@ -38,7 +38,8 @@ function mt:run(env)
     for i, var_name in ipairs(self.data.input or {}) do
         vars[i] = env:get_var(var_name)
     end
-    local func = assert(process[self.name].run, self.name)
+
+    local func = assert(env.process[self.name].run, self.name)
     if self.data.input then
         vars = table.pack(func(self, env, table.unpack(vars, 1, #self.data.input)))
     else
@@ -80,7 +81,5 @@ local M = {}
 function M.new(...)
     return new_node(...)
 end
-function M.process(custom)
-    process = custom
-end
+
 return M
