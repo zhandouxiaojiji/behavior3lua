@@ -75,6 +75,7 @@ local function new_env(params)
         return env.vars[k]
     end
     function env:set_var(k, v)
+        if k == "" then return end
         self.vars[k] = v
     end
     function env:get_inner_var(node, k)
@@ -110,6 +111,7 @@ function M.new(name, tree_data, env_params)
             return #env.stack > 0
         end,
         set_env = function (_, k, v)
+            if k == "" then return end
             env[k] = v
         end
     }
