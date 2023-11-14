@@ -59,7 +59,7 @@ function mt:run(env)
     if self.data.debug then
         local var_str = ''
         for k, v in pairs(env.vars) do
-            var_str = sformat("[%s]=%s,", k, v)
+            var_str = var_str .. sformat("[%s]=%s,", k, v)
         end
         print(sformat("[DEBUG] btree:%s, node:%s, ret:%s vars:{%s}",
         self.tree.name, self.id, ret, var_str))
