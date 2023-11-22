@@ -49,6 +49,8 @@ function mt:run(env)
     if ret ~= bret.RUNNING then
         env:set_inner_var(self, "YIELD", nil)
         env:pop_stack()
+    elseif env:get_inner_var(self, "YIELD") == nil then
+        env:set_inner_var(self, "YIELD", true)
     end
     for i, var_name in ipairs(self.data.output or {}) do
         env:set_var(var_name, vars[i + 1])
