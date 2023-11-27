@@ -1,14 +1,14 @@
 -- Log
 --
 
-local bret = require "behavior3.behavior_ret"
+local bret = require 'behavior3.behavior_ret'
 
 local M = {
-    name = "Log",
-    type = "Action",
-    desc = "打印日志",
+    name = 'Log',
+    type = 'Action',
+    desc = '打印日志',
     args = {
-        {"str", "string", "日志"}
+        { name = 'str', type = 'string', desc = '日志' }
     },
 }
 

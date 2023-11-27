@@ -3,34 +3,47 @@ package.path = package.path .. ';lualib/?.lua'
 local json = require "json"
 local process = require "example.process"
 
-local nodes = {}
-for k, v in pairs(process) do  
-    if v.args then             
-        for i, vv in pairs(v.args) do   
-            v.args[i] = {      
-                name = vv[1],  
-                type = vv[2],  
-                desc = vv[3],  
-            }
-        end
+local function processArgs(args)
+    local processedArgs = {}
+    for i, arg in pairs(args) do
+        processedArgs[i] = {
+            name = arg.name or '',
+            type = arg.type or '',
+            desc = arg.desc or '',
+            default = arg.default or nil,
+        }
     end
-    
-    local doc = v.doc          
-    if type(doc) == "string" then   
-        doc = string.gsub(doc, "^([ ]+", "")
-        doc = string.gsub(doc, "\n([ ]+", "\n")
+    return processedArgs
+end
+
+local function trimString(str)
+    return (str:gsub('^%s+', ''):gsub('\n%s+', '\n'))
+end
+
+local function createNode(v)
+    if v.args then
+        v.args = processArgs(v.args)
     end
-    
+
+    local doc = type(v.doc) == 'string' and trimString(v.doc) or v.doc
+
     local node = {
-        name   = v.name,       
-        type   = v.type,       
-        desc   = v.desc,       
-        args   = v.args,       
-        input  = v.input,      
-        output = v.output,     
-        doc    = doc,          
+        name   = v.name,
+        type   = v.type,
+        desc   = v.desc,
+        args   = v.args,
+        input  = v.input,
+        output = v.output,
+        doc    = doc,
     }
-    table.insert(nodes, node)  
+
+    return node
+end
+
+local nodes = {}
+for _, v in pairs(process) do
+    local node = createNode(v)
+    table.insert(nodes, node)
 end
 
 table.sort(nodes, function(a, b)

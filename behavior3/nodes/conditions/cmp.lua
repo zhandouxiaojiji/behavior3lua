@@ -7,14 +7,14 @@ local M = {
     type = 'Condition',
     desc = '比较值大小',
     args = {
-        {'value', 'lua?', '值'},
-        {'gt', 'int?', '>'},
-        {'ge', 'int?', '>='},
-        {'eq', 'int?', '=='},
-        {'le', 'int?', '<='},
-        {'lt', 'int?', '<'}
+        { name = 'value', type = 'lua?', desc = '值' },
+        { name = 'gt', type = 'int?', desc = '>' },
+        { name = 'ge', type = 'int?', desc = '>=' },
+        { name = 'eq', type = 'int?', desc = '==' },
+        { name = 'le', type = 'int?', desc = '<=' },
+        { name = 'lt', type = 'int?', desc = '<' }
     },
-    input = {'值(int)'},
+    input = { '值(int)' },
     doc = [[
         + 若值为空，返回失败
         + 非整数类型可能会报错

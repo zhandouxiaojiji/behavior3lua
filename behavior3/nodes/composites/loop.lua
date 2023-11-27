@@ -1,13 +1,13 @@
-local bret = require "behavior3.behavior_ret"
+local bret = require 'behavior3.behavior_ret'
 
 local M = {
-    name = "Loop",
+    name = 'Loop',
     type = 'Composite',
-    desc = "循环执行",
+    desc = '循环执行',
     args = {
-        {"count", "int?", "次数"},
+        { name = 'count', type = 'int?', desc = '次数' },
     },
-    input = {"次数(int)?"},
+    input = { '次数(int)?' },
 }
 
 function M.run(node, env, count)

@@ -8,7 +8,7 @@ local M = {
     type = 'Action',
     desc = '等待',
     args = {
-        {'time', 'int', '时间/tick'}
+        { name = 'time', type = 'int', desc = '时间/tick' }
     }
 }
 
@@ -20,10 +20,10 @@ function M.run(node, env)
     local t = node:resume(env)
     if t then
         if env.ctx.time >= t then
-            print('CONTINUE')
+            print('继续')
             return bret.SUCCESS
         else
-            print('WAITING')
+            print('等待...')
             return bret.RUNNING
         end
     end
