@@ -19,7 +19,7 @@ function M.run(node, env, count)
         last_i = resume_data[1]
         last_j = resume_data[2]
         if resume_ret == bret.RUNNING then
-            return
+            return resume_ret
         else
             last_j = last_j + 1
             if last_j > #node.children then
