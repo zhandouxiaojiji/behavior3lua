@@ -78,6 +78,23 @@ function mt:resume(env)
     return env:get_inner_var(self, "YIELD"), env.last_ret
 end
 
+local btree_funcs = {}
+local function btree_func(code, env)
+    local func = btree_funcs[code]
+    if not func then
+        func = load("return function(vars, math) _ENV = vars return "..code.." end")()
+        btree_funcs[code] = func
+    end
+    return func(env.vars, math)
+end
+
+function mt:get_env_args(key, env)
+    if not self.data.args or not self.data.args[key] then
+        return
+    end
+    return btree_func(assert(self.data.args[key], key), env)
+end
+
 local M = {}
 function M.new(...)
     return new_node(...)

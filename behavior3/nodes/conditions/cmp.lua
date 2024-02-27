@@ -7,7 +7,7 @@ local M = {
     type = 'Condition',
     desc = '比较值大小',
     args = {
-        {'value', 'lua?', '值'},
+        {'value', 'code?', '值'},
         {'gt', 'int?', '>'},
         {'ge', 'int?', '>='},
         {'eq', 'int?', '=='},
@@ -26,6 +26,7 @@ local function ret(r)
 end
 
 function M.run(node, env, value)
+    value = value or node:get_env_args("value", env)
     assert(type(value) == 'number')
     local args = node.args
     if args.gt then

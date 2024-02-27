@@ -25,10 +25,11 @@
             "id": 4,
             "name": "Cmp",
             "args": {
-              "gt": 50
+              "gt": 50,
+              "value": "hp"
             },
             "input": [
-              "hp"
+              ""
             ],
             "debug": false
           },

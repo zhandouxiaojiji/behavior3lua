@@ -11,6 +11,7 @@ return {
 
   -- 条件节点
   Cmp = require "behavior3.nodes.conditions.cmp",
+  Check = require "behavior3.nodes.conditions.check",
 
   -- 行为节点
   Log  = require "behavior3.nodes.actions.log",
