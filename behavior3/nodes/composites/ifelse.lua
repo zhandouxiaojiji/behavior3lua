@@ -27,6 +27,8 @@ local function ifelse(node, env, ret)
         return child_ret(node, env, 2)
     elseif node.children[3] then
         return child_ret(node, env, 3)
+    else
+        return bret.FAIL
     end
 end
 
