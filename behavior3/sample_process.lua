@@ -3,6 +3,7 @@ return {
   Parallel = require "behavior3.nodes.composites.parallel",
   Selector = require "behavior3.nodes.composites.selector",
   Sequence = require "behavior3.nodes.composites.sequence",
+  Once     = require "behavior3.nodes.composites.once",
 
   -- 装饰节点
   Not           = require "behavior3.nodes.decorators.not",

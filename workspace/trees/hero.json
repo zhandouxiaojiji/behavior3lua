@@ -8,167 +8,174 @@
     "children": [
       {
         "id": 2,
-        "name": "AlwaysFail",
+        "name": "Once",
         "args": {},
         "children": [
           {
             "id": 3,
-            "name": "Sequence",
+            "name": "AlwaysFail",
             "args": {},
-            "debug": false,
             "children": [
               {
                 "id": 4,
-                "name": "Log",
-                "args": {
-                  "str": "A: test sequeue1"
-                }
-              },
-              {
-                "id": 5,
-                "name": "AlwaysFail",
+                "name": "Sequence",
                 "args": {},
                 "children": [
+                  {
+                    "id": 5,
+                    "name": "Log",
+                    "args": {
+                      "str": "B: test sequeue1"
+                    }
+                  },
                   {
                     "id": 6,
                     "name": "Log",
                     "args": {
-                      "str": "A: test fail"
+                      "str": "B: test sequeue2"
                     }
                   }
                 ]
-              },
-              {
-                "id": 7,
-                "name": "Log",
-                "args": {
-                  "str": "A: test sequeue2"
-                }
               }
             ]
-          }
-        ]
-      },
-      {
-        "id": 8,
-        "name": "AlwaysFail",
-        "args": {},
-        "children": [
+          },
           {
-            "id": 9,
-            "name": "Sequence",
+            "id": 7,
+            "name": "AlwaysFail",
             "args": {},
             "children": [
               {
-                "id": 10,
-                "name": "Log",
-                "args": {
-                  "str": "B: test sequeue1"
-                }
-              },
-              {
-                "id": 11,
-                "name": "Log",
-                "args": {
-                  "str": "B: test sequeue2"
-                }
+                "id": 8,
+                "name": "Sequence",
+                "args": {},
+                "debug": false,
+                "children": [
+                  {
+                    "id": 9,
+                    "name": "Log",
+                    "args": {
+                      "str": "A: test sequeue1"
+                    }
+                  },
+                  {
+                    "id": 10,
+                    "name": "AlwaysFail",
+                    "args": {},
+                    "children": [
+                      {
+                        "id": 11,
+                        "name": "Log",
+                        "args": {
+                          "str": "A: test fail"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": 12,
+                    "name": "Log",
+                    "args": {
+                      "str": "A: test sequeue2"
+                    }
+                  }
+                ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "id": 12,
-        "name": "AlwaysFail",
-        "args": {},
-        "children": [
+          },
           {
             "id": 13,
-            "name": "Selector",
+            "name": "AlwaysFail",
             "args": {},
             "children": [
               {
                 "id": 14,
-                "name": "AlwaysFail",
+                "name": "Selector",
                 "args": {},
                 "children": [
                   {
                     "id": 15,
+                    "name": "AlwaysFail",
+                    "args": {},
+                    "children": [
+                      {
+                        "id": 16,
+                        "name": "Log",
+                        "args": {
+                          "str": "C: test fail"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": 17,
                     "name": "Log",
                     "args": {
-                      "str": "C: test fail"
+                      "str": "C: test sequeue1"
+                    }
+                  },
+                  {
+                    "id": 18,
+                    "name": "Log",
+                    "args": {
+                      "str": "C: test sequeue2"
                     }
                   }
                 ]
-              },
-              {
-                "id": 16,
-                "name": "Log",
-                "args": {
-                  "str": "C: test sequeue1"
-                }
-              },
-              {
-                "id": 17,
-                "name": "Log",
-                "args": {
-                  "str": "C: test sequeue2"
-                }
               }
             ]
-          }
-        ]
-      },
-      {
-        "id": 18,
-        "name": "AlwaysFail",
-        "args": {},
-        "children": [
+          },
           {
             "id": 19,
-            "name": "Parallel",
+            "name": "AlwaysFail",
             "args": {},
             "children": [
               {
                 "id": 20,
-                "name": "Log",
-                "args": {
-                  "str": "D: test sequeue1"
-                }
-              },
-              {
-                "id": 21,
-                "name": "AlwaysFail",
+                "name": "Parallel",
                 "args": {},
                 "children": [
                   {
-                    "id": 22,
+                    "id": 21,
                     "name": "Log",
                     "args": {
-                      "str": "D: test fail"
+                      "str": "D: test sequeue1"
+                    }
+                  },
+                  {
+                    "id": 22,
+                    "name": "AlwaysFail",
+                    "args": {},
+                    "children": [
+                      {
+                        "id": 23,
+                        "name": "Log",
+                        "args": {
+                          "str": "D: test fail"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "id": 24,
+                    "name": "Log",
+                    "args": {
+                      "str": "D: test sequeue2"
                     }
                   }
                 ]
-              },
-              {
-                "id": 23,
-                "name": "Log",
-                "args": {
-                  "str": "D: test sequeue2"
-                }
               }
             ]
           }
         ]
       },
       {
-        "id": 24,
+        "id": 25,
         "name": "Sequence",
         "desc": "攻击",
         "args": {},
         "children": [
           {
-            "id": 25,
+            "id": 26,
             "name": "FindEnemy",
             "args": {
               "x": 0,
@@ -181,7 +188,7 @@
             ]
           },
           {
-            "id": 26,
+            "id": 27,
             "name": "Attack",
             "args": {},
             "input": [
@@ -189,7 +196,7 @@
             ]
           },
           {
-            "id": 27,
+            "id": 28,
             "name": "Wait",
             "args": {
               "time": 10
@@ -198,13 +205,13 @@
         ]
       },
       {
-        "id": 28,
+        "id": 29,
         "name": "Sequence",
         "desc": "移动",
         "args": {},
         "children": [
           {
-            "id": 29,
+            "id": 30,
             "name": "FindEnemy",
             "args": {
               "w": 1000,
@@ -217,7 +224,7 @@
             ]
           },
           {
-            "id": 30,
+            "id": 31,
             "name": "MoveToTarget",
             "args": {},
             "input": [
@@ -227,13 +234,13 @@
         ]
       },
       {
-        "id": 31,
+        "id": 32,
         "name": "Sequence",
         "desc": "逃跑",
         "args": {},
         "children": [
           {
-            "id": 32,
+            "id": 33,
             "name": "GetHp",
             "args": {},
             "output": [
@@ -241,14 +248,14 @@
             ]
           },
           {
-            "id": 33,
+            "id": 34,
             "name": "Check",
             "args": {
               "value": "hp > 50"
             }
           },
           {
-            "id": 34,
+            "id": 35,
             "name": "MoveToPos",
             "args": {
               "x": 0,
@@ -258,7 +265,7 @@
         ]
       },
       {
-        "id": 35,
+        "id": 36,
         "name": "Idle"
       }
     ]

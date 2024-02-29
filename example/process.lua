@@ -6,6 +6,8 @@ return {
     IfElse   = require "behavior3.nodes.composites.ifelse",
     ForEach  = require "behavior3.nodes.composites.foreach",
     Loop     = require "behavior3.nodes.composites.loop",
+    Once     = require "behavior3.nodes.composites.once",
+
 
     -- 装饰节点
     Not           = require "behavior3.nodes.decorators.not",
