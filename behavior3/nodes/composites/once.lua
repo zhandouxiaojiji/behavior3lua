@@ -3,6 +3,8 @@
 
 local bret = require 'behavior3.behavior_ret'
 
+local sformat = string.format
+
 local M = {
     name = "Once",
     type = "Composite",
@@ -14,7 +16,7 @@ local M = {
     ]]
 }
 function M.run(node, env)
-    local key = string.format("%s#%d_once", node.name, node.id)
+    local key = sformat("%s#%d_once", node.name, node.id)
     if env:get_var(key) == true then
         return bret.FAIL
     end
@@ -22,13 +24,11 @@ function M.run(node, env)
     for _, child in ipairs(node.children) do
         local r = child:run(env)
         if r == bret.RUNNING then
-            error(string.format("%s->%s#%d should not return running status",
-                node.tree.name, node.name, node.id))
+            error(sformat("%s should not return running status", node.info))
         end
     end
 
     env:set_var(key, true)
-    
     return bret.FAIL
 end
 
