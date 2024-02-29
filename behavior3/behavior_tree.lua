@@ -24,13 +24,11 @@ mt.__index = mt
 function mt:init(name, tree_data)
 
     self.name = name
-    self.tick = 0
     local data = const(tree_data)
     self.root = behavior_node.new(data.root, self)
 end
 
 function mt:run(env)
-    -- print(string.format('===== tree:%s, tick:%s, stack:%d =====', self.name, self.tick, #env.stack))
     if #env.stack > 0 then
         local last_node = env.stack[#env.stack]
         while last_node do
@@ -43,7 +41,6 @@ function mt:run(env)
     else
         self.root:run(env)
     end
-    self.tick = self.tick + 1
 end
 
 function mt:interrupt(env)
