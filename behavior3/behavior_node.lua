@@ -73,6 +73,14 @@ function mt:resume(env)
     return env:get_inner_var(self, "YIELD"), env.last_ret
 end
 
+function mt:get_debug_info(env, ret)
+    local var_str = ''
+    for k, v in pairs(env.vars) do
+        var_str = var_str .. sformat("[%s]=%s,", k, v)
+    end
+    return sformat("[DEBUG] btree:%s, ret:%s vars:{%s}", self.info, ret, var_str)
+end
+
 local btree_funcs = {}
 local function btree_func(code, env)
     local func = btree_funcs[code]
@@ -100,11 +108,7 @@ function M.process(custom)
 end
 
 debugger = function(node, env, ret)
-    local var_str = ''
-    for k, v in pairs(env.vars) do
-        var_str = var_str .. sformat("[%s]=%s,", k, v)
-    end
-    print(sformat("[DEBUG] btree:%s, ret:%s vars:{%s}", node.info, ret, var_str))
+    print(node:get_debug_info(env, ret))
 end
 
 function M.set_debugger(func)
