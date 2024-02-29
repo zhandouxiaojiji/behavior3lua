@@ -27,6 +27,8 @@ local function ifelse(node, env, ret)
         return child_ret(node, env, 2)
     elseif node.children[3] then
         return child_ret(node, env, 3)
+    else
+        return bret.FAIL
     end
 end
 
@@ -45,7 +47,7 @@ function M.run(node, env)
 
     local r = node.children[1]:run(env)
     if r == bret.RUNNING then
-        return node:yield(env)
+        return node:yield(env, 1)
     end
     return ifelse(node, env, r)
 end
