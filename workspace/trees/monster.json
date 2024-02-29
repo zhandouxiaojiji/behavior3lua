@@ -8,37 +8,29 @@
     "children": [
       {
         "id": 2,
-        "name": "GetHp",
+        "name": "Selector",
         "args": {},
-        "output": [
-          "hp"
-        ],
-        "debug": true
-      },
-      {
-        "id": 3,
-        "name": "IfElse",
-        "args": {},
-        "debug": true,
         "children": [
           {
-            "id": 4,
-            "name": "Cmp",
-            "args": {
-              "gt": 50,
-              "value": "hp"
-            },
-            "input": [
-              ""
-            ],
-            "debug": false
-          },
-          {
-            "id": 5,
+            "id": 3,
             "name": "Sequence",
             "args": {},
-            "debug": false,
             "children": [
+              {
+                "id": 4,
+                "name": "GetHp",
+                "args": {},
+                "output": [
+                  "hp"
+                ]
+              },
+              {
+                "id": 5,
+                "name": "Check",
+                "args": {
+                  "value": "hp > 50"
+                }
+              },
               {
                 "id": 6,
                 "name": "Log",

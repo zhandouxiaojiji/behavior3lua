@@ -47,14 +47,13 @@ function mt:run(env)
     local ret = vars[1]
     assert(ret, self.info)
     if ret ~= bret.RUNNING then
+        for i, var_name in ipairs(self.data.output or {}) do
+            env:set_var(var_name, vars[i + 1])
+        end
         env:set_inner_var(self, "YIELD", nil)
         env:pop_stack()
-    elseif env:get_inner_var(self, "YIELD") == nil then
-        env:set_inner_var(self, "YIELD", true)
     end
-    for i, var_name in ipairs(self.data.output or {}) do
-        env:set_var(var_name, vars[i + 1])
-    end
+    
     env.last_ret = ret
     --print("fini", self.name, self.node_id, table.unpack(vars, 1, #self.data.input))
 
@@ -63,8 +62,8 @@ function mt:run(env)
         for k, v in pairs(env.vars) do
             var_str = var_str .. sformat("[%s]=%s,", k, v)
         end
-        print(sformat("[DEBUG] btree:%s, node:%s, ret:%s vars:{%s}",
-        self.tree.name, self.id, ret, var_str))
+        print(sformat("[DEBUG] ->%s btree:%s, node:%s, ret:%s vars:{%s}",
+            self.name, self.tree.name, self.id, ret, var_str))
     end
     return ret
 end
