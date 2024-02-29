@@ -1,6 +1,5 @@
 local behavior_node = require 'behavior3.behavior_node'
 local behavior_ret = require 'behavior3.behavior_ret'
-local json = require 'json'
 
 local meta = {
     __newindex = function(_, k)
@@ -22,7 +21,6 @@ local trees = {}
 local mt = {}
 mt.__index = mt
 function mt:init(name, tree_data)
-
     self.name = name
     local data = const(tree_data)
     self.root = behavior_node.new(data.root, self)

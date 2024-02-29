@@ -1,5 +1,6 @@
 local bret = require 'behavior3.behavior_ret'
 local process = require 'behavior3.sample_process'
+local debugger
 
 local sformat = string.format
 local table = table
@@ -53,17 +54,12 @@ function mt:run(env)
         env:set_inner_var(self, "YIELD", nil)
         env:pop_stack()
     end
-    
+
     env.last_ret = ret
     --print("fini", self.name, self.node_id, table.unpack(vars, 1, #self.data.input))
 
     if self.data.debug then
-        local var_str = ''
-        for k, v in pairs(env.vars) do
-            var_str = var_str .. sformat("[%s]=%s,", k, v)
-        end
-        print(sformat("[DEBUG] ->%s btree:%s, node:%s, ret:%s vars:{%s}",
-            self.name, self.tree.name, self.id, ret, var_str))
+        debugger(self, env, ret)
     end
     return ret
 end
@@ -81,7 +77,7 @@ local btree_funcs = {}
 local function btree_func(code, env)
     local func = btree_funcs[code]
     if not func then
-        func = load("return function(vars, math) _ENV = vars return "..code.." end")()
+        func = load("return function(vars, math) _ENV = vars return " .. code .. " end")()
         btree_funcs[code] = func
     end
     return func(env.vars, math)
@@ -98,7 +94,21 @@ local M = {}
 function M.new(...)
     return new_node(...)
 end
+
 function M.process(custom)
     process = custom
 end
+
+debugger = function(node, env, ret)
+    local var_str = ''
+    for k, v in pairs(env.vars) do
+        var_str = var_str .. sformat("[%s]=%s,", k, v)
+    end
+    print(sformat("[DEBUG] btree:%s, ret:%s vars:{%s}", node.info, ret, var_str))
+end
+
+function M.set_debugger(func)
+    debugger = func
+end
+
 return M
