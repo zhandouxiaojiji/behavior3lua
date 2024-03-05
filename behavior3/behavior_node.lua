@@ -41,11 +41,17 @@ function mt:run(env)
     end
     assert(process[self.name], self.name)
     local func = assert(process[self.name].run, self.name)
-    if self.data.input then
-        vars = table.pack(func(self, env, table.unpack(vars, 1, #self.data.input)))
-    else
-        vars = table.pack(func(self, env, table.unpack(vars)))
+    local ok, errmsg = xpcall(function ()
+        if self.data.input then
+            vars = table.pack(func(self, env, table.unpack(vars, 1, #self.data.input)))
+        else
+            vars = table.pack(func(self, env, table.unpack(vars)))
+        end
+    end, debug.traceback)
+    if not ok then
+        error(sformat("node %s run error:%s", self.info, errmsg))
     end
+
     local ret = vars[1]
     assert(ret, self.info)
     if ret ~= bret.RUNNING then
