@@ -8,174 +8,12 @@
     "children": [
       {
         "id": 2,
-        "name": "Once",
-        "args": {},
-        "children": [
-          {
-            "id": 3,
-            "name": "AlwaysFail",
-            "args": {},
-            "children": [
-              {
-                "id": 4,
-                "name": "Sequence",
-                "args": {},
-                "children": [
-                  {
-                    "id": 5,
-                    "name": "Log",
-                    "args": {
-                      "str": "B: test sequeue1"
-                    }
-                  },
-                  {
-                    "id": 6,
-                    "name": "Log",
-                    "args": {
-                      "str": "B: test sequeue2"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "id": 7,
-            "name": "AlwaysFail",
-            "args": {},
-            "children": [
-              {
-                "id": 8,
-                "name": "Sequence",
-                "args": {},
-                "debug": false,
-                "children": [
-                  {
-                    "id": 9,
-                    "name": "Log",
-                    "args": {
-                      "str": "A: test sequeue1"
-                    }
-                  },
-                  {
-                    "id": 10,
-                    "name": "AlwaysFail",
-                    "args": {},
-                    "children": [
-                      {
-                        "id": 11,
-                        "name": "Log",
-                        "args": {
-                          "str": "A: test fail"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "id": 12,
-                    "name": "Log",
-                    "args": {
-                      "str": "A: test sequeue2"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "id": 13,
-            "name": "AlwaysFail",
-            "args": {},
-            "children": [
-              {
-                "id": 14,
-                "name": "Selector",
-                "args": {},
-                "children": [
-                  {
-                    "id": 15,
-                    "name": "AlwaysFail",
-                    "args": {},
-                    "children": [
-                      {
-                        "id": 16,
-                        "name": "Log",
-                        "args": {
-                          "str": "C: test fail"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "id": 17,
-                    "name": "Log",
-                    "args": {
-                      "str": "C: test sequeue1"
-                    }
-                  },
-                  {
-                    "id": 18,
-                    "name": "Log",
-                    "args": {
-                      "str": "C: test sequeue2"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "id": 19,
-            "name": "AlwaysFail",
-            "args": {},
-            "children": [
-              {
-                "id": 20,
-                "name": "Parallel",
-                "args": {},
-                "children": [
-                  {
-                    "id": 21,
-                    "name": "Log",
-                    "args": {
-                      "str": "D: test sequeue1"
-                    }
-                  },
-                  {
-                    "id": 22,
-                    "name": "AlwaysFail",
-                    "args": {},
-                    "children": [
-                      {
-                        "id": 23,
-                        "name": "Log",
-                        "args": {
-                          "str": "D: test fail"
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "id": 24,
-                    "name": "Log",
-                    "args": {
-                      "str": "D: test sequeue2"
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 25,
         "name": "Sequence",
         "desc": "攻击",
         "args": {},
         "children": [
           {
-            "id": 26,
+            "id": 3,
             "name": "FindEnemy",
             "args": {
               "x": 0,
@@ -188,7 +26,7 @@
             ]
           },
           {
-            "id": 27,
+            "id": 4,
             "name": "Attack",
             "args": {},
             "input": [
@@ -196,7 +34,7 @@
             ]
           },
           {
-            "id": 28,
+            "id": 5,
             "name": "Wait",
             "args": {
               "time": 10
@@ -205,13 +43,13 @@
         ]
       },
       {
-        "id": 29,
+        "id": 6,
         "name": "Sequence",
         "desc": "移动",
         "args": {},
         "children": [
           {
-            "id": 30,
+            "id": 7,
             "name": "FindEnemy",
             "args": {
               "w": 1000,
@@ -224,7 +62,7 @@
             ]
           },
           {
-            "id": 31,
+            "id": 8,
             "name": "MoveToTarget",
             "args": {},
             "input": [
@@ -234,13 +72,13 @@
         ]
       },
       {
-        "id": 32,
+        "id": 9,
         "name": "Sequence",
         "desc": "逃跑",
         "args": {},
         "children": [
           {
-            "id": 33,
+            "id": 10,
             "name": "GetHp",
             "args": {},
             "output": [
@@ -248,14 +86,7 @@
             ]
           },
           {
-            "id": 34,
-            "name": "Check",
-            "args": {
-              "value": "hp > 50"
-            }
-          },
-          {
-            "id": 35,
+            "id": 11,
             "name": "MoveToPos",
             "args": {
               "x": 0,
@@ -265,7 +96,7 @@
         ]
       },
       {
-        "id": 36,
+        "id": 12,
         "name": "Idle"
       }
     ]
