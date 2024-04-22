@@ -60,6 +60,8 @@ function mt:run(env)
         end
         env:set_inner_var(self, "YIELD", nil)
         env:pop_stack()
+    elseif env:get_inner_var(self, "YIELD") == nil then
+        env:set_inner_var(self, "YIELD", true)
     end
 
     env.last_ret = ret
