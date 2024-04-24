@@ -27,9 +27,9 @@ function mt:init(name, tree_data)
 end
 
 function mt:run(env)
+    local last_ret
     if #env.stack > 0 then
         local last_node = env.stack[#env.stack]
-        local last_ret
         while last_node do
             last_ret = last_node:run(env)
             if last_ret == behavior_ret.RUNNING then
@@ -37,10 +37,16 @@ function mt:run(env)
             end
             last_node = env.stack[#env.stack]
         end
-        return last_ret
     else
-        return self.root:run(env)
+        last_ret = self.root:run(env)
     end
+    if env.abort then
+        env.inner_vars = {}
+        env.stack = {}
+        env.abort = nil
+        return behavior_ret.ABORT
+    end
+    return last_ret
 end
 
 function mt:interrupt(env)
@@ -62,7 +68,8 @@ local function new_env(params)
         inner_vars = {}, -- [k.."_"..node.id] => vars
         vars = {},
         stack = {},
-        last_ret = nil
+        last_ret = nil,
+        abort = nil,
     }
     for k, v in pairs(params) do
         env[k] = v

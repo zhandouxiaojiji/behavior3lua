@@ -21,6 +21,7 @@ function M.run(node, env, enemy)
     env.vars.ATTACKING = true
 
     return bret.SUCCESS
+    -- return bret.ABORT
 end
 
 return M

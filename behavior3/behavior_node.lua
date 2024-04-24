@@ -31,6 +31,9 @@ function mt:init(node_data, tree)
 end
 
 function mt:run(env)
+    if env.abort then
+        return bret.RUNNING
+    end
     --print("start", self.name, self.node_id)
     if env:get_inner_var(self, "YIELD") == nil then
         env:push_stack(self)
@@ -41,7 +44,7 @@ function mt:run(env)
     end
     assert(process[self.name], self.name)
     local func = assert(process[self.name].run, self.name)
-    local ok, errmsg = xpcall(function ()
+    local ok, errmsg = xpcall(function()
         if self.data.input then
             vars = table.pack(func(self, env, table.unpack(vars, 1, #self.data.input)))
         else
@@ -54,6 +57,10 @@ function mt:run(env)
 
     local ret = vars[1]
     assert(ret, self.info)
+    if ret == bret.ABORT then
+        env.abort = true
+        return bret.RUNNING -- 为了安全退栈
+    end
     if ret ~= bret.RUNNING then
         for i, var_name in ipairs(self.data.output or {}) do
             env:set_var(var_name, vars[i + 1])

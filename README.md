@@ -40,6 +40,7 @@ end
 + SUCCESS 成功
 + FAIL 失败
 + RUNNING 正在运行
++ ABORT 中断执行
 
 ## 复合节点
 + Parallel 并行执行, 执行所有子节点并反回true
