@@ -37,6 +37,7 @@ function M.run(node, env, count)
                 return node:yield(env, { i, j })
             end
         end
+        last_j = 1
     end
     return bret.SUCCESS
 end
