@@ -25,8 +25,10 @@ function mt:init(node_data, tree)
     self.args = self.data.args or {}
     self.children = {}
     for _, child_data in ipairs(node_data.children or {}) do
-        local child = new_node(child_data, tree)
-        table.insert(self.children, child)
+        if not child_data.disabled then
+            local child = new_node(child_data, tree)
+            table.insert(self.children, child)
+        end
     end
 end
 
