@@ -29,7 +29,7 @@ function M.run(node, env)
     end
 
     env:set_var(key, true)
-    return bret.FAIL
+    return bret.SUCCESS
 end
 
 return M
