@@ -83,3 +83,29 @@ local function test_moster()
 end
 
 test_moster()
+
+local function test_repeat_until_success()
+    print("=================== test repeat until success ========================")
+    local btree = behavior_tree.new("repeat-until-success", load_tree("workspace/trees/test-repeat-until-success.json"), {
+        ctx   = ctx,
+    })
+    for i = 1, 7 do
+        ctx.time = ctx.time + 1
+        btree:run()
+    end
+end
+
+test_repeat_until_success()
+
+local function test_repeat_until_fail()
+    print("=================== test repeat until fail ========================")
+    local btree = behavior_tree.new("repeat-until-fail", load_tree("workspace/trees/test-repeat-until-failure.json"), {
+        ctx   = ctx,
+    })
+    for i = 1, 7 do
+        ctx.time = ctx.time + 1
+        btree:run()
+    end
+end
+
+test_repeat_until_fail()

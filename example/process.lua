@@ -13,6 +13,8 @@ return {
     Not           = require "behavior3.nodes.decorators.not",
     AlwaysFail    = require "behavior3.nodes.decorators.always_fail",
     AlwaysSuccess = require "behavior3.nodes.decorators.always_success",
+    RepeatUntilSuccess = require "behavior3.nodes.decorators.repeat_until_success",
+    RepeatUntilFailure = require "behavior3.nodes.decorators.repeat_until_fail",
 
     -- 条件节点
     Cmp       = require "behavior3.nodes.conditions.cmp",
@@ -23,6 +25,8 @@ return {
     -- 行为节点
     Log          = require "behavior3.nodes.actions.log",
     Wait         = require "behavior3.nodes.actions.wait",
+    Now          = require "behavior3.nodes.actions.now",
+    Clear        = require "behavior3.nodes.actions.clear",
     GetHp        = require "example.actions.get_hp",
     Attack       = require "example.actions.attack",
     MoveToTarget = require "example.actions.move_to_target",

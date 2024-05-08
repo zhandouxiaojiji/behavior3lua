@@ -1,0 +1,127 @@
+{
+  "name": "test-repeat-until-failure",
+  "root": {
+    "id": 1,
+    "name": "Sequence",
+    "children": [
+      {
+        "id": 2,
+        "name": "Log",
+        "args": {
+          "str": "Begin test repeat until failure"
+        }
+      },
+      {
+        "id": 3,
+        "name": "AlwaysSuccess",
+        "children": [
+          {
+            "id": 4,
+            "name": "RepeatUntilFailure",
+            "args": {
+              "maxLoop": 3
+            },
+            "input": [
+              ""
+            ],
+            "debug": true,
+            "children": [
+              {
+                "id": 5,
+                "name": "AlwaysSuccess",
+                "children": [
+                  {
+                    "id": 6,
+                    "name": "Log",
+                    "args": {
+                      "str": "[1] run repeat until failure!!!"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "AlwaysSuccess",
+        "children": [
+          {
+            "id": 8,
+            "name": "Sequence",
+            "debug": true,
+            "children": [
+              {
+                "id": 9,
+                "name": "RepeatUntilFailure",
+                "args": {
+                  "maxLoop": 3
+                },
+                "input": [
+                  ""
+                ],
+                "children": [
+                  {
+                    "id": 10,
+                    "name": "Sequence",
+                    "children": [
+                      {
+                        "id": 11,
+                        "name": "Sequence",
+                        "children": [
+                          {
+                            "id": 12,
+                            "name": "Wait",
+                            "args": {
+                              "time": 1
+                            }
+                          },
+                          {
+                            "id": 13,
+                            "name": "Log",
+                            "args": {
+                              "str": "wait 1s"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "id": 14,
+                        "name": "AlwaysSuccess",
+                        "children": [
+                          {
+                            "id": 15,
+                            "name": "Log",
+                            "args": {
+                              "str": "[2] run repeat until failure!!!"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": 16,
+                "name": "Log",
+                "args": {
+                  "str": "DO NOT LOG THIS!!!"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "name": "Log",
+        "args": {
+          "str": "End test repeat until failure"
+        }
+      }
+    ]
+  },
+  "desc": ""
+}
