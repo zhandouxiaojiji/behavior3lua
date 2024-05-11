@@ -117,6 +117,9 @@ function M.new(name, tree_data, env_params)
         set_env = function (_, k, v)
             if k == "" then return end
             env[k] = v
+        end,
+        get_env = function ()
+            return env
         end
     }
 end
