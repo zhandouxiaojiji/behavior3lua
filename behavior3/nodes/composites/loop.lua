@@ -16,16 +16,16 @@ function M.run(node, env, count)
     local last_i = 1
     local last_j = 1
     if resume_data then
-        last_i = resume_data[1]
-        last_j = resume_data[2]
         if resume_ret == bret.RUNNING then
-            return resume_ret
-        else
-            last_j = last_j + 1
-            if last_j > #node.children then
-                last_j = 1
-                last_i = last_i + 1
-            end
+            error(string.format("%s->${%s}#${$d}: unexpected status error",
+                node.tree.name, node.name, node.id))
+        end
+
+        last_i = resume_data[1]
+        last_j = resume_data[2] + 1
+        if last_j > #node.children then
+            last_j = 1
+            last_i = last_i + 1
         end
     end
 

@@ -16,7 +16,8 @@ function M.run(node, env, enemy)
     local yeild, last_ret = node:resume(env)
     if yeild then
         if last_ret == bret.RUNNING then
-            return last_ret
+            error(string.format("%s->${%s}#${$d}: unexpected status error",
+                node.tree.name, node.name, node.id))
         end
         return bret.FAIL
     end
