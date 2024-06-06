@@ -23,7 +23,11 @@ function M.run(node, env)
         return bret.SUCCESS
     end
 
-    local r = node.children[1]:run(env)
+    local child = node.children[1]
+    if not child then
+        return bret.SUCCESS
+    end
+    local r = child:run(env)
     if r == bret.RUNNING then
         return node:yield(env)
     end
