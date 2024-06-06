@@ -22,7 +22,11 @@ function M.run(node, env, enemy)
         return bret.FAIL
     end
 
-    local r = node.children[1]:run(env)
+    local child = node.children[1]
+    if not child then
+        return bret.FAIL
+    end
+    local r = child:run(env)
     if r == bret.RUNNING then
         return node:yield(env)
     end
