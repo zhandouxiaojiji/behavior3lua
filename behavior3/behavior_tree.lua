@@ -1,6 +1,15 @@
 local behavior_node = require 'behavior3.behavior_node'
 local behavior_ret = require 'behavior3.behavior_ret'
 
+---@class BehaviorNodeDefine
+---@field name string
+---@field type string
+---@field desc string?
+---@field doc string?
+---@field input string[]?
+---@field output string[]?
+---@field args table[]?
+---@field run fun(BehaviorNode, BehaviorEnv, ...):BehaviorRet,any ?
 local meta = {
     __newindex = function(_, k)
         error(string.format('readonly:%s', k), 2)
@@ -18,6 +27,7 @@ end
 
 local trees = {}
 
+---@class BehaviorTree
 local mt = {}
 mt.__index = mt
 function mt:init(name, tree_data)
@@ -64,17 +74,20 @@ local function new_tree(name, tree_data)
 end
 
 local function new_env(params)
+    ---@class BehaviorEnv
+    ---@field ctx any?
+    ---@field last_ret BehaviorRet?
+    ---@field abort boolean?
     local env = {
         inner_vars = {}, -- [k.."_"..node.id] => vars
         vars = {},
         stack = {},
-        last_ret = nil,
-        abort = nil,
     }
     for k, v in pairs(params) do
         env[k] = v
     end
 
+    ---@param k string
     function env:get_var(k)
         return env.vars[k]
     end

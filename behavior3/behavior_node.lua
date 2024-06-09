@@ -6,6 +6,7 @@ local sformat = string.format
 local table = table
 local print = print
 
+---@class BehaviorNode
 local mt = {}
 mt.__index = mt
 
@@ -32,6 +33,9 @@ function mt:init(node_data, tree)
     end
 end
 
+--- BehaviorNode:run()
+---@param env BehaviorEnv
+---@return BehaviorRet
 function mt:run(env)
     if env.abort then
         return bret.RUNNING

@@ -3,6 +3,7 @@
 
 local bret = require 'behavior3.behavior_ret'
 
+---@type BehaviorNodeDefine
 local M = {
     name = 'Selector',
     type = 'Composite',
@@ -10,34 +11,34 @@ local M = {
     doc = [[
         + 一直往下执行，有子节点返回成功则返回成功，若全部节点返回失败则返回失败
         + 子节点是或 (OR) 的关系
-    ]]
-}
-function M.run(node, env)
-    local last_idx, last_ret = node:resume(env)
-    if last_idx then
-        if last_ret == bret.SUCCESS then
-            return last_ret
-        elseif last_ret == bret.FAIL then
-            last_idx = last_idx + 1
+    ]],
+    run = function(node, env)
+        local last_idx, last_ret = node:resume(env)
+        if last_idx then
+            if last_ret == bret.SUCCESS then
+                return last_ret
+            elseif last_ret == bret.FAIL then
+                last_idx = last_idx + 1
+            else
+                error(string.format("%s->${%s}#${$d}: unexpected status error",
+                    node.tree.name, node.name, node.id))
+            end
         else
-            error(string.format("%s->${%s}#${$d}: unexpected status error",
-                node.tree.name, node.name, node.id))
+            last_idx = 1
         end
-    else
-        last_idx = 1
-    end
 
-    for i = last_idx, #node.children do
-        local child = node.children[i]
-        local r = child:run(env)
-        if r == bret.RUNNING then
-            return node:yield(env, i)
+        for i = last_idx, #node.children do
+            local child = node.children[i]
+            local r = child:run(env)
+            if r == bret.RUNNING then
+                return node:yield(env, i)
+            end
+            if r == bret.SUCCESS then
+                return r
+            end
         end
-        if r == bret.SUCCESS then
-            return r
-        end
+        return bret.FAIL
     end
-    return bret.FAIL
-end
+}
 
 return M
