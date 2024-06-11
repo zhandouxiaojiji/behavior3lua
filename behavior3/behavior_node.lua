@@ -114,6 +114,7 @@ local function btree_func(code, env)
 end
 
 function mt:get_env_args(key, env)
+    local a
     if not self.data.args or not self.data.args[key] then
         return
     end
