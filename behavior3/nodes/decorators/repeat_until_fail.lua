@@ -10,7 +10,7 @@ local M = {
         {
             name = "maxLoop",
             type = "int?",
-            desc = "最大循环次数" 
+            desc = "最大循环次数"
         }
     },
     doc = [[

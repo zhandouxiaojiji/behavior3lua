@@ -10,7 +10,7 @@ local M = {
     desc = "打印日志",
     args = {
         {
-            name = "message", 
+            name = "message",
             type = "string",
             desc = "日志"
         }
