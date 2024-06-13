@@ -5,11 +5,11 @@ return {
   Sequence = require "behavior3.nodes.composites.sequence",
 
   -- 装饰节点
-  Once          = require "behavior3.nodes.decorators.once",
-  Not           = require "behavior3.nodes.decorators.not",
-  Inverter      = require "behavior3.nodes.decorators.not",
-  Listen        = require "behavior3.nodes.decorators.listen",
-  AlwaysFail    = require "behavior3.nodes.decorators.always_fail",
+  Once = require "behavior3.nodes.decorators.once",
+  Not = require "behavior3.nodes.decorators.not",
+  Inverter = require "behavior3.nodes.decorators.not",
+  Listen = require "behavior3.nodes.decorators.listen",
+  AlwaysFail = require "behavior3.nodes.decorators.always_fail",
   AlwaysSuccess = require "behavior3.nodes.decorators.always_success",
   RepeatUntilSuccess = require "behavior3.nodes.decorators.repeat_until_success",
   RepeatUntilFailure = require "behavior3.nodes.decorators.repeat_until_fail",

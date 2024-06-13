@@ -7,12 +7,12 @@ local behavior_event = require 'behavior3.behavior_event'
 ---@class BehaviorNodeDefine
 ---@field name string
 ---@field type string
----@field desc string?
----@field doc string?
----@field input string[]?
----@field output string[]?
----@field args {name:string, type:string, desc:string, options?:{name:string, value:string}[]}[]?
----@field run fun(node:BehaviorNode, env:BehaviorEnv, ...): BehaviorRet,any ?
+---@field desc? string
+---@field doc? string
+---@field input? string[]
+---@field output? string[]
+---@field args? {name:string, type:string, desc:string, options?:{name:string, value:string}[]}[]
+---@field run? fun(node:BehaviorNode, env:BehaviorEnv, ...): BehaviorRet,any
 local meta = {
     __newindex = function(_, k)
         error(string.format('readonly:%s', k), 2)
