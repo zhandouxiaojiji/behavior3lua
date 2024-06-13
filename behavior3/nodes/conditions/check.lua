@@ -5,7 +5,11 @@ local M = {
     type = "Condition",
     desc = "检查True或False",
     args = {
-        { "value", "code?", "值" },
+        {
+            name = "value",
+            type = "code?",
+            desc = "值"
+        },
     },
     doc = [[
         + 做简单数值公式判定，返回成功或失败

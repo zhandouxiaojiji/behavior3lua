@@ -5,7 +5,11 @@ local M = {
     type = 'Composite',
     desc = "循环执行",
     args = {
-        { "count", "int?", "次数" },
+        {
+            name = "count",
+            type = "int?",
+            desc = "次数"
+        },
     },
     input = { "次数(int)?" },
     run = function(node, env, count)

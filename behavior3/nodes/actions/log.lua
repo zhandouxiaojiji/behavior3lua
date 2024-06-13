@@ -9,10 +9,14 @@ local M = {
     type = "Action",
     desc = "打印日志",
     args = {
-        { "str", "string", "日志" }
+        {
+            name = "message", 
+            type = "string",
+            desc = "日志"
+        }
     },
     run = function(node, env)
-        print(node.args.str)
+        print(node.args.message)
         return bret.SUCCESS
     end
 }

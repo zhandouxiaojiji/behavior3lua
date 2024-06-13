@@ -24,6 +24,7 @@ function mt:init(node_data, tree)
 
     self.data = node_data
     self.args = self.data.args or {}
+    ---@type BehaviorNode[]
     self.children = {}
     for _, child_data in ipairs(node_data.children or {}) do
         if not child_data.disabled then

@@ -7,11 +7,13 @@ local nodes = {}
 for k, v in pairs(process) do
     if v.args then
         for i, vv in pairs(v.args) do
-            v.args[i] = {
-                name = vv[1],
-                type = vv[2],
-                desc = vv[3],
-            }
+            if #vv > 0 then
+                v.args[i] = {
+                    name = vv[1],
+                    type = vv[2],
+                    desc = vv[3],
+                }
+            end
         end
     end
 

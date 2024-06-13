@@ -3,10 +3,12 @@ return {
   Parallel = require "behavior3.nodes.composites.parallel",
   Selector = require "behavior3.nodes.composites.selector",
   Sequence = require "behavior3.nodes.composites.sequence",
-  Once     = require "behavior3.nodes.composites.once",
 
   -- 装饰节点
+  Once          = require "behavior3.nodes.decorators.once",
   Not           = require "behavior3.nodes.decorators.not",
+  Inverter      = require "behavior3.nodes.decorators.not",
+  Listen        = require "behavior3.nodes.decorators.listen",
   AlwaysFail    = require "behavior3.nodes.decorators.always_fail",
   AlwaysSuccess = require "behavior3.nodes.decorators.always_success",
   RepeatUntilSuccess = require "behavior3.nodes.decorators.repeat_until_success",

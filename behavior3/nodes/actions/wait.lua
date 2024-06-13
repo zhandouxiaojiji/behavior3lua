@@ -12,7 +12,11 @@ local M = {
     type = 'Action',
     desc = '等待',
     args = {
-        { 'time', 'int', '时间/tick' }
+        {
+            name = 'time',
+            type = 'int',
+            desc = '时间/tick'
+        }
     },
     run = function(node, env)
         local args = node.args

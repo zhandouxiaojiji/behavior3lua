@@ -1,5 +1,8 @@
 local behavior_node = require 'behavior3.behavior_node'
 local behavior_ret = require 'behavior3.behavior_ret'
+local behavior_event = require 'behavior3.behavior_event'
+
+---@alias BehaviorCallback fun(...)
 
 ---@class BehaviorNodeDefine
 ---@field name string
@@ -8,8 +11,8 @@ local behavior_ret = require 'behavior3.behavior_ret'
 ---@field doc string?
 ---@field input string[]?
 ---@field output string[]?
----@field args table[]?
----@field run fun(BehaviorNode, BehaviorEnv, ...):BehaviorRet,any ?
+---@field args {name:string, type:string, desc:string, options?:{name:string, value:string}[]}[]?
+---@field run fun(node:BehaviorNode, env:BehaviorEnv, ...): BehaviorRet,any ?
 local meta = {
     __newindex = function(_, k)
         error(string.format('readonly:%s', k), 2)
@@ -36,6 +39,8 @@ function mt:init(name, tree_data)
     self.root = behavior_node.new(data.root, self)
 end
 
+---@param env BehaviorEnv
+---@return BehaviorRet
 function mt:run(env)
     local last_ret
     if #env.stack > 0 then
@@ -48,19 +53,40 @@ function mt:run(env)
             last_node = env.stack[#env.stack]
         end
     else
+        self:dispatch(env, behavior_event.BEFORE_RUN)
         last_ret = self.root:run(env)
     end
     if env.abort then
         env.inner_vars = {}
         env.stack = {}
         env.abort = nil
+        self:dispatch(env, behavior_event.INTERRUPTED)
         return behavior_ret.ABORT
+    elseif last_ret == behavior_ret.SUCCESS then
+        self:dispatch(env, behavior_event.AFTER_RUN)
+        self:dispatch(env, behavior_event.AFTER_RUN_SUCCESS)
+    elseif last_ret == behavior_ret.FAIL then
+        self:dispatch(env, behavior_event.AFTER_RUN)
+        self:dispatch(env, behavior_event.AFTER_RUN_FAILURE)
     end
     return last_ret
 end
 
+---@param env BehaviorEnv
+---@param event string
+---@param ... unknown
+function mt:dispatch(env, event, ...)
+    local handlers = env.handlers[event]
+    if handlers then
+        for _, callback in ipairs(handlers) do
+            callback(...)
+        end
+    end
+end
+
 function mt:interrupt(env)
     if #env.stack > 0 then
+        self:dispatch(env, behavior_event.INTERRUPTED)
         env.inner_vars = {}
         env.stack = {}
     end
@@ -78,10 +104,14 @@ local function new_env(params)
     ---@field ctx any?
     ---@field last_ret BehaviorRet?
     ---@field abort boolean?
+    ---@field stack BehaviorNode[]
+    ---@field inner_vars {[string]: any}
+    ---@field handlers {[string]: BehaviorCallback[]}
     local env = {
         inner_vars = {}, -- [k.."_"..node.id] => vars
         vars = {},
         stack = {},
+        handlers = {}
     }
     for k, v in pairs(params) do
         env[k] = v
@@ -91,24 +121,51 @@ local function new_env(params)
     function env:get_var(k)
         return env.vars[k]
     end
+
+    ---@param k string
+    ---@param v any
     function env:set_var(k, v)
         if k == "" then return end
         self.vars[k] = v
     end
+
+    ---@param node BehaviorNode
+    ---@param k string
+    ---@return any
     function env:get_inner_var(node, k)
         return self.inner_vars[k .. '_' .. node.id]
     end
+
+    ---@param node BehaviorNode
+    ---@param k string
+    ---@param v any
     function env:set_inner_var(node, k, v)
         self.inner_vars[k .. '_' .. node.id] = v
     end
+
+    ---@param node BehaviorNode
     function env:push_stack(node)
         self.stack[#self.stack + 1] = node
     end
+
+    ---@return BehaviorNode
     function env:pop_stack()
         local node = self.stack[#self.stack]
         self.stack[#self.stack] = nil
         return node
     end
+
+    ---@param event string
+    ---@param callback BehaviorCallback
+    function env:on(event, callback)
+        local handlers = self.handlers[event]
+        if not handlers then
+            handlers = {}
+            self.handlers[event] = handlers
+        end
+        handlers[#handlers + 1] = callback
+    end
+
     return env
 end
 

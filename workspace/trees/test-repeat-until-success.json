@@ -8,7 +8,7 @@
         "id": 2,
         "name": "Log",
         "args": {
-          "str": "Begin test repeat until success"
+          "message": "Begin test repeat until success"
         }
       },
       {
@@ -34,7 +34,7 @@
                     "id": 6,
                     "name": "Log",
                     "args": {
-                      "str": "[1] run repeat until success!!!"
+                      "message": "[1] run repeat until success!!!"
                     }
                   }
                 ]
@@ -80,7 +80,7 @@
                             "id": 13,
                             "name": "Log",
                             "args": {
-                              "str": "wait 1s"
+                              "message": "wait 1s"
                             }
                           }
                         ]
@@ -93,7 +93,7 @@
                             "id": 15,
                             "name": "Log",
                             "args": {
-                              "str": "[2] run repeat until success!!!"
+                              "message": "[2] run repeat until success!!!"
                             }
                           }
                         ]
@@ -106,7 +106,7 @@
                 "id": 16,
                 "name": "Log",
                 "args": {
-                  "str": "DO NOT LOG THIS!!!"
+                  "message": "DO NOT LOG THIS!!!"
                 }
               }
             ]
@@ -117,7 +117,7 @@
         "id": 17,
         "name": "Log",
         "args": {
-          "str": "End test repeat until success"
+          "message": "End test repeat until success"
         }
       }
     ]

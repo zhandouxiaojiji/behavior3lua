@@ -6,11 +6,13 @@ return {
     IfElse   = require "behavior3.nodes.composites.ifelse",
     ForEach  = require "behavior3.nodes.composites.foreach",
     Loop     = require "behavior3.nodes.composites.loop",
-    Once     = require "behavior3.nodes.composites.once",
-
-
+    
+    
     -- 装饰节点
+    Once          = require "behavior3.nodes.decorators.once",
     Not           = require "behavior3.nodes.decorators.not",
+    Inverter      = require "behavior3.nodes.decorators.not",
+    Listen        = require "behavior3.nodes.decorators.listen",
     AlwaysFail    = require "behavior3.nodes.decorators.always_fail",
     AlwaysSuccess = require "behavior3.nodes.decorators.always_success",
     RepeatUntilSuccess = require "behavior3.nodes.decorators.repeat_until_success",

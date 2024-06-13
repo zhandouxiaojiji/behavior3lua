@@ -12,12 +12,12 @@ local M = {
     type = 'Condition',
     desc = '比较值大小',
     args = {
-        { 'value', 'code?', '值' },
-        { 'gt', 'int?', '>' },
-        { 'ge', 'int?', '>=' },
-        { 'eq', 'int?', '==' },
-        { 'le', 'int?', '<=' },
-        { 'lt', 'int?', '<' }
+        { name = 'value', type = 'code?', desc = '值' },
+        { name = 'gt', type = 'int?', desc = '>' },
+        { name = 'ge', type = 'int?', desc = '>=' },
+        { name = 'eq', type = 'int?', desc = '==' },
+        { name = 'le', type = 'int?', desc = '<=' },
+        { name = 'lt', type = 'int?', desc = '<' }
     },
     input = { '值(int)' },
     doc = [[
