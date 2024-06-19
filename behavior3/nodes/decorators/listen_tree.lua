@@ -3,7 +3,7 @@ local bret = require 'behavior3.behavior_ret'
 
 ---@type BehaviorNodeDefine
 local M = {
-    name = "Listen",
+    name = "ListenTree",
     type = "Decorator",
     desc = "侦听行为树事件",
     args = {

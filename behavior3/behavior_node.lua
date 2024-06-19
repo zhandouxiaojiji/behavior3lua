@@ -108,6 +108,7 @@ local btree_funcs = {}
 local function btree_func(code, env)
     local func = btree_funcs[code]
     if not func then
+        code = code:gsub("!=", "~=")
         func = load("return function(vars, math) _ENV = vars return " .. code .. " end")()
         btree_funcs[code] = func
     end
