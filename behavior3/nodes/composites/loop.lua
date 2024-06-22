@@ -4,6 +4,10 @@ local M = {
     name = "Loop",
     type = 'Composite',
     desc = "循环执行",
+    doc = [[
+        + 当子节点返回「失败」时，退出遍历并返回「失败」状态
+        + 其它情况返回成功/正在运行
+    ]],
     args = {
         {
             name = "count",
@@ -37,6 +41,8 @@ local M = {
                 local r = child:run(env)
                 if r == bret.RUNNING then
                     return node:yield(env, { i, j })
+                elseif r == bret.FAIL then
+                    return bret.FAIL
                 end
             end
             last_j = 1

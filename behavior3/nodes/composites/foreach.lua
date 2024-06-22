@@ -9,8 +9,8 @@ local M = {
     output = { "{变量}" },
     doc = [[
         + 每次执行子节点前会设置当前遍历到的变量
-        + 会执行所有子节点
-        + 永远返回成功/正在运行
+        + 当子节点返回失败时，退出遍历并返回失败状态
+        + 其它情况返回成功/正在运行
     ]],
     run = function(node, env, arr)
         local resume_data, resume_ret = node:resume(env)
@@ -38,6 +38,8 @@ local M = {
                 local r = child:run(env)
                 if r == bret.RUNNING then
                     return node:yield(env, { i, j })
+                elseif r == bret.FAIL then
+                    return bret.FAIL
                 end
             end
             last_j = 1
