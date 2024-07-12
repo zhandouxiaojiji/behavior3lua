@@ -4,15 +4,14 @@ return {
     Selector = require "behavior3.nodes.composites.selector",
     Sequence = require "behavior3.nodes.composites.sequence",
     IfElse   = require "behavior3.nodes.composites.ifelse",
-    ForEach  = require "behavior3.nodes.composites.foreach",
-    Loop     = require "behavior3.nodes.composites.loop",
+    
     
     
     -- 装饰节点
     Once          = require "behavior3.nodes.decorators.once",
     Not           = require "behavior3.nodes.decorators.not",
     Inverter      = require "behavior3.nodes.decorators.not",
-    Listen        = require "behavior3.nodes.decorators.listen",
+    ListenTree    = require "behavior3.nodes.decorators.listen_tree",
     AlwaysFail    = require "behavior3.nodes.decorators.always_fail",
     AlwaysSuccess = require "behavior3.nodes.decorators.always_success",
     RepeatUntilSuccess = require "behavior3.nodes.decorators.repeat_until_success",
@@ -25,6 +24,8 @@ return {
     FindEnemy = require "example.conditions.find_enemy",
 
     -- 行为节点
+    ForEach      = require "behavior3.nodes.actions.foreach",
+    Loop         = require "behavior3.nodes.actions.loop",
     Log          = require "behavior3.nodes.actions.log",
     Wait         = require "behavior3.nodes.actions.wait",
     Now          = require "behavior3.nodes.actions.now",

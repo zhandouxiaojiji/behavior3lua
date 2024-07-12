@@ -20,7 +20,7 @@
                 "children": [
                   {
                     "id": 5,
-                    "name": "Listen",
+                    "name": "ListenTree",
                     "args": {
                       "builtin": "beforeRun"
                     },
@@ -36,7 +36,7 @@
                   },
                   {
                     "id": 7,
-                    "name": "Listen",
+                    "name": "ListenTree",
                     "args": {
                       "builtin": "afterRun"
                     },
@@ -52,7 +52,7 @@
                   },
                   {
                     "id": 9,
-                    "name": "Listen",
+                    "name": "ListenTree",
                     "args": {
                       "builtin": "interrupted"
                     },
