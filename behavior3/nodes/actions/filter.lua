@@ -46,7 +46,7 @@ local M = {
             end
         end
 
-        return bret.SUCCESS, new_arr
+        return bret.SUCCESS, nil, new_arr
     end,
 }
 
