@@ -134,6 +134,51 @@ function json.encode(val)
   return ( encode(val) )
 end
 
+function json.prettify(str, spaces)
+  spaces = spaces or 2
+  local indent = string.rep(" ", spaces)
+  local level = 0
+  local formatted = {}
+  local i = 1
+  local len = #str
+  local in_string = false
+  
+  local function newline()
+    table.insert(formatted, "\n" .. string.rep(indent, level))
+  end
+
+  while i <= len do
+    local char = str:sub(i, i)
+    if char == '"' and str:sub(i-1, i-1) ~= "\\" then
+      in_string = not in_string
+    end
+    
+    if not in_string then
+      if char == "{" or char == "[" then
+        table.insert(formatted, char)
+        level = level + 1
+        newline()
+      elseif char == "}" or char == "]" then
+        level = level - 1
+        newline()
+        table.insert(formatted, char)
+      elseif char == "," then
+        table.insert(formatted, char)
+        newline()
+      elseif char == ":" then
+        table.insert(formatted, char .. " ")
+      elseif char ~= " " and char ~= "\n" and char ~= "\r" and char ~= "\t" then
+        table.insert(formatted, char)
+      end
+    else
+      table.insert(formatted, char)
+    end
+    i = i + 1
+  end
+
+  return table.concat(formatted)
+end
+
 
 -------------------------------------------------------------------------------
 -- Decode
