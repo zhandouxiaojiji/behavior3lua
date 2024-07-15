@@ -6,12 +6,12 @@ return {
   Sequence        = require "behavior3.nodes.composites.sequence",
   
   -- 装饰节点
-  AlwaysFail      = require "behavior3.nodes.decorators.always_fail",
-  AlwaysSuccess   = require "behavior3.nodes.decorators.always_success",
-  Inverter        = require "behavior3.nodes.decorators.not",
-  ListenTree      = require "behavior3.nodes.decorators.listen_tree",
-  Not             = require "behavior3.nodes.decorators.not",
-  Once            = require "behavior3.nodes.decorators.once",
+  Once               = require "behavior3.nodes.decorators.once",
+  Not                = require "behavior3.nodes.decorators.not",
+  Inverter           = require "behavior3.nodes.decorators.not",
+  AlwaysFail         = require "behavior3.nodes.decorators.always_fail",
+  AlwaysSuccess      = require "behavior3.nodes.decorators.always_success",
+  RepeatUntilSuccess = require "behavior3.nodes.decorators.repeat_until_success",
   RepeatUntilFailure = require "behavior3.nodes.decorators.repeat_until_fail",
   RepeatUntilSuccess = require "behavior3.nodes.decorators.repeat_until_success",
 

@@ -1,7 +1,16 @@
 
 local behavior_tree = require "behavior3.behavior_tree"
 local behavior_node = require "behavior3.behavior_node"
-behavior_node.process(require "example.process")
+
+local process = require "example.process"
+process.Listen = {
+    run = function()
+        print("Listen not defined")
+        return "success"
+    end
+}
+
+behavior_node.process(process)
 
 local json = require "json"
 
