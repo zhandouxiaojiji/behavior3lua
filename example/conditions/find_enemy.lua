@@ -7,11 +7,31 @@ local M = {
     type = "Condition",
     desc = "查找敌人",
     args = {
-        {"x",     "int?",     "x"},
-        {"y",     "int?",     "y"},
-        {"w",     "int?",     "宽"},
-        {"h",     "int?",     "高"},
-        {"count", "string?",  "查找上限"},
+        {
+            name = 'x',
+            type = 'int?',
+            desc = 'x'
+        },
+        {
+            name = 'y',
+            type = 'int?',
+            desc = 'y'
+        },
+        {
+            name = 'w',
+            type = 'int?',
+            desc = '宽'
+        },
+        {
+            name = 'h',
+            type = 'int?',
+            desc = '高'
+        },
+        {
+            name = 'count',
+            type = 'string?',
+            desc = '查找上限'
+        },
     },
     output = {"目标单位"},
     doc = [[

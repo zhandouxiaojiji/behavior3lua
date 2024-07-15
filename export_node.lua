@@ -8,11 +8,7 @@ for k, v in pairs(process) do
     if v.args then
         for i, vv in pairs(v.args) do
             if #vv > 0 then
-                v.args[i] = {
-                    name = vv[1],
-                    type = vv[2],
-                    desc = vv[3],
-                }
+                v.args[i] = vv
             end
         end
     end
@@ -40,11 +36,21 @@ table.sort(nodes, function(a, b)
 end)
 
 local str = json.encode(nodes)
+str = json.prettify(str)
 print(str)
 
 local path = "workspace/node-config.b3-setting"
 local file = io.open(path, "w")
-file:write(str)
-file:close()
+if file then
+    local success, err = pcall(function()
+        file:write(str)
+    end)
+    if not success then
+        print("Error writing to file:", err)
+    end
+    file:close()
+else
+    print("Error: Unable to open file for writing")
+end
 
 print("save to", path)

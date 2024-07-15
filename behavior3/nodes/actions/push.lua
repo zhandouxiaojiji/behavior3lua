@@ -17,3 +17,5 @@ local M = {
         return bret.SUCCESS
     end
 }
+
+return M

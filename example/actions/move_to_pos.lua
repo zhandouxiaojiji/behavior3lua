@@ -5,8 +5,16 @@ local M = {
     type = 'Action',
     desc = '移动到坐标',
     args = {
-        {'x', 'int', 'x'},
-        {'y', 'int', 'y'}
+        {
+            name = 'x',
+            type = 'int',
+            desc = 'x坐标'
+        },
+        {
+            name = 'y',
+            type = 'int',
+            desc = 'y坐标'
+        }
     }
 }
 
