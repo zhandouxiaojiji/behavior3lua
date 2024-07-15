@@ -8,7 +8,6 @@ return {
   Once = require "behavior3.nodes.decorators.once",
   Not = require "behavior3.nodes.decorators.not",
   Inverter = require "behavior3.nodes.decorators.not",
-  ListenTree = require "behavior3.nodes.decorators.listen_tree",
   AlwaysFail = require "behavior3.nodes.decorators.always_fail",
   AlwaysSuccess = require "behavior3.nodes.decorators.always_success",
   RepeatUntilSuccess = require "behavior3.nodes.decorators.repeat_until_success",
