@@ -12,7 +12,7 @@ local behavior_event = require 'behavior3.behavior_event'
 ---@field input? string[]
 ---@field output? string[]
 ---@field args? {name:string, type:string, desc:string, options?:{name:string, value:string}[]}[]
----@field run? fun(node:BehaviorNode, env:BehaviorEnv, ...): BehaviorRet,any
+---@field run? fun(node:BehaviorNode, env:BehaviorEnv, ...): BehaviorRet, ...
 local meta = {
     __newindex = function(_, k)
         error(string.format('readonly:%s', k), 2)
@@ -76,11 +76,9 @@ end
 ---@param event string
 ---@param ... unknown
 function mt:dispatch(env, event, ...)
-    local handlers = env.handlers[event]
-    if handlers then
-        for _, callback in ipairs(handlers) do
-            callback(...)
-        end
+    local dispatch_target = env.ctx.dispatch_target
+    if dispatch_target then
+        env.ctx:dispatch_target(env, event, ...)
     end
 end
 
@@ -106,12 +104,10 @@ local function new_env(params)
     ---@field abort boolean?
     ---@field stack BehaviorNode[]
     ---@field inner_vars {[string]: any}
-    ---@field handlers {[string]: BehaviorCallback[]}
     local env = {
         inner_vars = {}, -- [k.."_"..node.id] => vars
         vars = {},
         stack = {},
-        handlers = {}
     }
     for k, v in pairs(params) do
         env[k] = v
@@ -153,17 +149,6 @@ local function new_env(params)
         local node = self.stack[#self.stack]
         self.stack[#self.stack] = nil
         return node
-    end
-
-    ---@param event string
-    ---@param callback BehaviorCallback
-    function env:on(event, callback)
-        local handlers = self.handlers[event]
-        if not handlers then
-            handlers = {}
-            self.handlers[event] = handlers
-        end
-        handlers[#handlers + 1] = callback
     end
 
     return env
