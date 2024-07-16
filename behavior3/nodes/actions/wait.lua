@@ -26,7 +26,7 @@ local M = {
                 print('CONTINUE')
                 return bret.SUCCESS
             else
-                print('WAITING')
+                print('WAITING', "node#" .. node.data.id)
                 return bret.RUNNING
             end
         end

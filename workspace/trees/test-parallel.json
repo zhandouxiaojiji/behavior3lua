@@ -1,0 +1,105 @@
+{
+  "name": "test-parallel",
+  "root": {
+    "id": 1,
+    "name": "Sequence",
+    "children": [
+      {
+        "id": 2,
+        "name": "Parallel",
+        "children": [
+          {
+            "id": 3,
+            "name": "Sequence",
+            "children": [
+              {
+                "id": 4,
+                "name": "Log",
+                "args": {
+                  "message": "hello1"
+                }
+              },
+              {
+                "id": 5,
+                "name": "Wait",
+                "args": {
+                  "time": 3
+                }
+              },
+              {
+                "id": 6,
+                "name": "Log",
+                "args": {
+                  "message": "hell1 done"
+                }
+              }
+            ]
+          },
+          {
+            "id": 7,
+            "name": "Sequence",
+            "children": [
+              {
+                "id": 8,
+                "name": "Log",
+                "args": {
+                  "message": "hello2"
+                }
+              },
+              {
+                "id": 9,
+                "name": "Wait",
+                "args": {
+                  "time": 5
+                }
+              },
+              {
+                "id": 10,
+                "name": "Log",
+                "args": {
+                  "message": "hell2 done"
+                }
+              }
+            ]
+          },
+          {
+            "id": 11,
+            "name": "Sequence",
+            "children": [
+              {
+                "id": 12,
+                "name": "Log",
+                "args": {
+                  "message": "hello3"
+                }
+              },
+              {
+                "id": 13,
+                "name": "Wait",
+                "args": {
+                  "time": 4
+                }
+              },
+              {
+                "id": 14,
+                "name": "Log",
+                "args": {
+                  "message": "hell3 done"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "name": "Log",
+        "args": {
+          "message": "Parallel done"
+        }
+      }
+    ]
+  },
+  "export": true,
+  "desc": ""
+}
