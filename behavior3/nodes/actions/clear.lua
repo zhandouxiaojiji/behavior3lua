@@ -1,5 +1,6 @@
 local bret = require "behavior3.behavior_ret"
 
+---@type BehaviorNodeDefine
 local M = {
     name = "Clear",
     type = "Action",
