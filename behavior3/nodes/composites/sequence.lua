@@ -7,6 +7,7 @@ local bret = require 'behavior3.behavior_ret'
 local M = {
     name = 'Sequence',
     type = 'Composite',
+    status = { "&success", "|failure", "|running" },
     desc = '顺序执行',
     doc = [[
         + 一直往下执行，只有当所有子节点都返回成功, 才返回成功

@@ -4,9 +4,22 @@ local behavior_event = require 'behavior3.behavior_event'
 
 ---@alias BehaviorCallback fun(...)
 
+---@alias BehaviorStatusFlag
+---|>"success"
+---| "running"
+---| "failure"
+---| "!success" !(child_success|child_success|...)
+---| "!failure" !(child_failure|child_failure|...)
+---| "|success" child_success|child_success|...
+---| "|failure" child_failure|child_failure|...
+---| "|running" child_running|child_running|...
+---| "&success" child_success&child_success&...
+---| "&failure" child_failure&child_failure&...
+
 ---@class BehaviorNodeDefine
 ---@field name string
 ---@field type string
+---@field status? BehaviorStatusFlag[]
 ---@field desc? string
 ---@field doc? string
 ---@field input? string[]

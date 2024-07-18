@@ -19,12 +19,15 @@ return {
     -- 条件节点
     Cmp       = require "behavior3.nodes.conditions.cmp",
     Check       = require "behavior3.nodes.conditions.check",
+    IsNull    = require "behavior3.nodes.conditions.is_null",
+    NotNull   = require "behavior3.nodes.conditions.not_null",
 
     FindEnemy = require "example.conditions.find_enemy",
 
     -- 行为节点
     ForEach      = require "behavior3.nodes.actions.foreach",
     Loop         = require "behavior3.nodes.actions.loop",
+    Repeat       = require "behavior3.nodes.actions.loop",
     Log          = require "behavior3.nodes.actions.log",
     Wait         = require "behavior3.nodes.actions.wait",
     Now          = require "behavior3.nodes.actions.now",

@@ -18,6 +18,8 @@ return {
   Check              = require "behavior3.nodes.conditions.check",
   Cmp                = require "behavior3.nodes.conditions.cmp",
   Includes           = require "behavior3.nodes.conditions.includes",
+  IsNull             = require "behavior3.nodes.conditions.is_null",
+  NotNull            = require "behavior3.nodes.conditions.not_null",
 
   -- 行为节点
   Calculate          = require "behavior3.nodes.actions.calculate",
@@ -28,6 +30,7 @@ return {
   Let                = require "behavior3.nodes.actions.let",
   Log                = require "behavior3.nodes.actions.log",
   Loop               = require "behavior3.nodes.actions.loop",
+  Repeat             = require "behavior3.nodes.actions.loop",
   Now                = require "behavior3.nodes.actions.now",
   Push               = require "behavior3.nodes.actions.push",
   Random             = require "behavior3.nodes.actions.random",
