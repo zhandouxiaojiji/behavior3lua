@@ -3,43 +3,45 @@ local bret = require "behavior3.behavior_ret"
 ---@type BehaviorNodeDefine
 local M = {
     name = "Repeat",
-    type = "Decorator",
-    desc = "一直尝试直到子节点返回失败",
-    input = { "最大循环次数?" },
-    args = {
-        {
-            name = "maxLoop",
-            type = "int?",
-            desc = "最大循环次数"
-        }
-    },
+    type = 'Action',
+    desc = "循环执行",
     doc = [[
         + 只能有一个子节点，多个仅执行第一个
-        + 当子节点返回失败时，退出遍历并返回失败状态
-        + 执行完所有子节点后，返回成功
+        + 当子节点返回「失败」时，退出遍历并返回「失败」状态
+        + 其它情况返回成功/正在运行
     ]],
-    run = function(node, env, max_loop)
-        max_loop = max_loop or node.args.maxLoop or math.maxinteger
-
-        local count, resume_ret = node:resume(env)
-        if count then
-            if resume_ret == bret.FAIL then
+    args = {
+        {
+            name = "count",
+            type = "int?",
+            desc = "次数"
+        },
+    },
+    input = { "次数(int)?" },
+    run = function(node, env, count)
+        count = count or node.args.count
+        local last_i, resume_ret = node:resume(env)
+        if last_i then
+            if resume_ret == bret.RUNNING then
+                error(string.format("%s->${%s}#${$d}: unexpected status error",
+                    node.tree.name, node.name, node.id))
+            elseif resume_ret == bret.FAIL then
                 return bret.FAIL
-            elseif count >= max_loop then
-                return bret.SUCCESS
-            else
-                count = count + 1
             end
+            last_i = last_i + 1
         else
-            count = 1
+            last_i = 1
         end
 
-        local r = node.children[1]:run(env)
-        if r == bret.FAIL then
-            return bret.FAIL
-        else
-            return node:yield(env, count)
+        for i = last_i, count do
+            local r = node.children[1]:run(env)
+            if r == bret.RUNNING then
+                return node:yield(env, i)
+            elseif r == bret.FAIL then
+                return bret.FAIL
+            end
         end
+        return bret.SUCCESS
     end
 }
 

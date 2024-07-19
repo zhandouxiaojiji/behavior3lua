@@ -14,6 +14,7 @@ return {
     AlwaysSuccess      = require "behavior3.nodes.decorators.always_success",
     RepeatUntilSuccess = require "behavior3.nodes.decorators.repeat_until_success",
     RepeatUntilFailure = require "behavior3.nodes.decorators.repeat_until_fail",
+    Repeat             = require "behavior3.nodes.decorators.repeat",
 
 
     -- 条件节点
@@ -26,8 +27,6 @@ return {
 
     -- 行为节点
     ForEach      = require "behavior3.nodes.actions.foreach",
-    Loop         = require "behavior3.nodes.actions.loop",
-    Repeat       = require "behavior3.nodes.actions.loop",
     Log          = require "behavior3.nodes.actions.log",
     Wait         = require "behavior3.nodes.actions.wait",
     Now          = require "behavior3.nodes.actions.now",

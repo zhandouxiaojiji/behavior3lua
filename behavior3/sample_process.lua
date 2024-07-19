@@ -29,8 +29,6 @@ return {
   Index              = require "behavior3.nodes.actions.index",
   Let                = require "behavior3.nodes.actions.let",
   Log                = require "behavior3.nodes.actions.log",
-  Loop               = require "behavior3.nodes.actions.loop",
-  Repeat             = require "behavior3.nodes.actions.loop",
   Now                = require "behavior3.nodes.actions.now",
   Push               = require "behavior3.nodes.actions.push",
   Random             = require "behavior3.nodes.actions.random",
