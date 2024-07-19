@@ -7,6 +7,7 @@ local M = {
     desc = '取反',
     doc = [[
         + 将子节点的返回值取反
+        + 只能有一个子节点，多个仅执行第一个
     ]],
     run = function(node, env)
         local r

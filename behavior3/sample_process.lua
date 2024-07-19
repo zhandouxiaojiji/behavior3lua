@@ -7,12 +7,12 @@ return {
 
   -- 装饰节点
   Once               = require "behavior3.nodes.decorators.once",
-  Not                = require "behavior3.nodes.decorators.not",
-  Inverter           = require "behavior3.nodes.decorators.not",
+  Invert             = require "behavior3.nodes.decorators.invert",
   AlwaysFail         = require "behavior3.nodes.decorators.always_fail",
   AlwaysSuccess      = require "behavior3.nodes.decorators.always_success",
   RepeatUntilSuccess = require "behavior3.nodes.decorators.repeat_until_success",
   RepeatUntilFailure = require "behavior3.nodes.decorators.repeat_until_fail",
+  Repeat             = require "behavior3.nodes.decorators.repeat",
 
   -- 条件节点
   Check              = require "behavior3.nodes.conditions.check",
