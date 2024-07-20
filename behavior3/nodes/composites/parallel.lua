@@ -8,6 +8,7 @@ local M = {
     name = 'Parallel',
     type = 'Composite',
     status = { "success", "|running" },
+    children = -1,
     desc = '并行执行',
     doc = [[
         执行所有子节点并返回成功

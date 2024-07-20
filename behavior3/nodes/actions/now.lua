@@ -4,6 +4,7 @@ local bret = require "behavior3.behavior_ret"
 local M = {
     name = "Now",
     type = "Action",
+    children = 0,
     desc = "获取当前时间",
     output = { "当前时间" },
     run = function(node, env)

@@ -2,8 +2,9 @@ local bret = require 'behavior3.behavior_ret'
 
 ---@type BehaviorNodeDefine
 local M = {
-    name = 'Not',
+    name = 'Invert',
     type = 'Decorator',
+    children = 1,
     desc = '取反',
     doc = [[
         + 将子节点的返回值取反

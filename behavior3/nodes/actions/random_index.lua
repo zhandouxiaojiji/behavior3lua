@@ -4,6 +4,7 @@ local bret = require "behavior3.behavior_ret"
 local M = {
     name = "RandomIndex",
     type = "Action",
+    children = 0,
     desc = "随机返回输入的其中一个",
     input = { "数组" },
     output = { "随机目标" },

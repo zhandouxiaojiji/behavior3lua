@@ -4,6 +4,7 @@ local bret = require "behavior3.behavior_ret"
 local M = {
     name = "Let",
     type = "Action",
+    children = 0,
     desc = "定义新的变量名",
     input = { "变量名" },
     output = { "新变量名" },

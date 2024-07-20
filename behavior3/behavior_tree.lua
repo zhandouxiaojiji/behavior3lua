@@ -20,6 +20,7 @@ local behavior_event = require 'behavior3.behavior_event'
 ---@field name string
 ---@field type string
 ---@field status? BehaviorStatusFlag[]
+---@field children? -1|0|1|3
 ---@field desc? string
 ---@field doc? string
 ---@field input? string[]

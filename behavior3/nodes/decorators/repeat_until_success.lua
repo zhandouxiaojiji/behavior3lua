@@ -4,6 +4,7 @@ local bret = require "behavior3.behavior_ret"
 local M = {
     name = "RepeatUntilSuccess",
     type = "Decorator",
+    children = 1,
     desc = "一直尝试直到子节点返回成功",
     input = { "最大循环次数?" },
     args = {

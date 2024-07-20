@@ -9,6 +9,7 @@ local sformat = string.format
 local M = {
     name = "Once",
     type = "Decorator",
+    children = 1,
     desc = "只执行一次",
     doc = [[
         + 只能有一个子节点,多个仅执行第一个

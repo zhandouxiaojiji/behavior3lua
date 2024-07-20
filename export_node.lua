@@ -1,6 +1,6 @@
 package.path = package.path .. ';lualib/?.lua'
 
-local json = require "json"
+local olua = require "olua"
 local process = require "example.process"
 
 local nodes = {}
@@ -20,13 +20,15 @@ for k, v in pairs(process) do
     end
 
     local node = {
-        name   = v.name,
-        type   = v.type,
-        desc   = v.desc,
-        args   = v.args,
-        input  = v.input,
-        output = v.output,
-        doc    = doc,
+        name     = v.name,
+        type     = v.type,
+        desc     = v.desc,
+        args     = v.args,
+        input    = v.input,
+        output   = v.output,
+        children = v.children,
+        status   = v.status,
+        doc      = doc,
     }
     table.insert(nodes, node)
 end
@@ -35,8 +37,7 @@ table.sort(nodes, function(a, b)
     return a.name < b.name
 end)
 
-local str = json.encode(nodes)
-str = json.prettify(str)
+local str = olua.json_stringify(nodes, { indent = 2})
 print(str)
 
 local path = "workspace/node-config.b3-setting"

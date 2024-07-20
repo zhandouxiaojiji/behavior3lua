@@ -10,3 +10,4 @@ local M = {
         return value == nil and bret.SUCCESS or bret.FAIL
     end
 }
+return M
