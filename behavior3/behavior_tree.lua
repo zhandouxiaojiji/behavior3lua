@@ -90,6 +90,9 @@ end
 ---@param event string
 ---@param ... unknown
 function mt:dispatch(env, event, ...)
+    if not env.ctx then
+        return
+    end
     local dispatch_target = env.ctx.dispatch_target
     if dispatch_target then
         env.ctx:dispatch_target(env, event, ...)
