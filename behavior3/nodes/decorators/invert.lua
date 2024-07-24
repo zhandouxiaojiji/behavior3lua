@@ -4,7 +4,6 @@ local bret = require 'behavior3.behavior_ret'
 local M = {
     name = 'Invert',
     type = 'Decorator',
-    children = 1,
     desc = '取反',
     doc = [[
         + 将子节点的返回值取反

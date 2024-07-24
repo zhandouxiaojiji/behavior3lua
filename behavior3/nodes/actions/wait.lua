@@ -9,7 +9,6 @@ local SPEED = 50
 ---@type BehaviorNodeDefine
 local M = {
     name = 'Wait',
-    children = 0,
     type = 'Action',
     desc = '等待',
     args = {

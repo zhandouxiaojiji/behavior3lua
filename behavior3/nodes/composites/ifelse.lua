@@ -25,8 +25,6 @@ end
 local M = {
     name = 'IfElse',
     type = 'Composite',
-    children = 3,
-    status = { "|success", "|running", "|failure" },
     desc = 'If判断',
     doc = [[
         + 拥有三个子节点(至少两个)

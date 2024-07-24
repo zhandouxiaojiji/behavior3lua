@@ -4,7 +4,6 @@ local bret = require "behavior3.behavior_ret"
 local M = {
     name = "Repeat",
     type = 'Action',
-    children = 1,
     desc = "循环执行",
     doc = [[
         + 只能有一个子节点，多个仅执行第一个

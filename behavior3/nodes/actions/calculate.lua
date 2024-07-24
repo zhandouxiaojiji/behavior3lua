@@ -4,7 +4,6 @@ local bret = require "behavior3.behavior_ret"
 local M = {
     name = "Calculate",
     type = "Action",
-    children = 0,
     desc = "计算公式",
     args = {
         {

@@ -4,7 +4,6 @@ local bret = require "behavior3.behavior_ret"
 local M = {
     name = "Index",
     type = "Action",
-    children = 0,
     desc = "索引输入的数组或对象",
     args = {
         {

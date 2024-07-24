@@ -7,7 +7,6 @@ local bret = require 'behavior3.behavior_ret'
 local M = {
     name = 'AlwaysSuccess',
     type = 'Decorator',
-    children = 1,
     desc = '始终返回成功',
     doc = [[
         + 只能有一个子节点,多个仅执行第一个

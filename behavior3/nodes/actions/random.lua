@@ -4,7 +4,6 @@ local bret = require "behavior3.behavior_ret"
 local M = {
     name = "Random",
     type = "Action",
-    children = 0,
     desc = "返回一个随机数",
     input = { "最小值?", "最大值?" },
     output = { "随机数" },

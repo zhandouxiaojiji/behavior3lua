@@ -4,7 +4,6 @@ local bret = require "behavior3.behavior_ret"
 local M = {
     name = "Push",
     type = "Action",
-    children = 0,
     desc = "向数组中添加元素",
     input = { "数组", "元素" },
     doc = [[

@@ -5,7 +5,6 @@ local butil = require "behavior3.behavior_util"
 local M = {
     name = "Let",
     type = "Action",
-    children = 0,
     desc = "定义新的变量名",
     input = { "已存在变量名?" },
     args = {

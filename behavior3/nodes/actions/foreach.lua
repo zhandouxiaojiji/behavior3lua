@@ -5,7 +5,6 @@ local M = {
     name = "ForEach",
     type = 'Action',
     desc = "遍历数组",
-    children = 1,
     input = { "[{数组}]" },
     output = { "{变量}" },
     doc = [[

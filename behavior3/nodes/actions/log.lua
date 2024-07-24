@@ -7,7 +7,6 @@ local bret = require "behavior3.behavior_ret"
 local M = {
     name = "Log",
     type = "Action",
-    children = 0,
     desc = "打印日志",
     args = {
         {

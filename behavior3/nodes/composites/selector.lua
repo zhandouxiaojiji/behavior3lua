@@ -7,8 +7,6 @@ local bret = require 'behavior3.behavior_ret'
 local M = {
     name = 'Selector',
     type = 'Composite',
-    children = -1,
-    status = { "|success", "&failure", "|running" },
     desc = '选择执行',
     doc = [[
         + 一直往下执行，有子节点返回成功则返回成功，若全部节点返回失败则返回失败

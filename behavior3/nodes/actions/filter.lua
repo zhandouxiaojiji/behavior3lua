@@ -4,7 +4,6 @@ local bret = require "behavior3.behavior_ret"
 local M = {
     name = "Filter",
     type = "Action",
-    children = 1,
     desc = "返回满足条件的元素",
     input = { "数组" },
     output = { "变量", "新数组" },
