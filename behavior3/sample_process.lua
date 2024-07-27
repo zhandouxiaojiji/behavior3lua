@@ -35,4 +35,5 @@ return {
   RandomIndex        = require "behavior3.nodes.actions.random_index",
   Wait               = require "behavior3.nodes.actions.wait",
   Concat             = require "behavior3.nodes.actions.concat",
+  WaitForCount       = require "behavior3.nodes.actions.wait_for_count",
 }
