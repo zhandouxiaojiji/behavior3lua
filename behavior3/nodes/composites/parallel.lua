@@ -29,12 +29,9 @@ local M = {
                     env:push_stack(child)
                     status = child:run(env)
                     if status == bret.RUNNING then
-                        rev = {}
+                        p = #nodes + 1
                         while #env.stack > level do
-                            table.insert(rev, env:pop_stack())
-                        end
-                        while #rev > 0 do
-                            table.insert(nodes, table.remove(rev))
+                            table.insert(nodes, p, env:pop_stack())
                         end
                         break
                     end
