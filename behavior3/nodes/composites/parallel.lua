@@ -24,15 +24,16 @@ local M = {
             if nodes == nil then
                 status = child:run(env)
             elseif #nodes > 0 then
-                for j = #nodes, 1, -1 do
-                    child = nodes[j]
+                while #nodes > 0 do
+                    child = table.remove(nodes)
                     env:push_stack(child)
                     status = child:run(env)
                     if status == bret.RUNNING then
-                        env:pop_stack()
+                        p = #nodes + 1
+                        while #env.stack > level do
+                            table.insert(nodes, p, env:pop_stack())
+                        end
                         break
-                    else
-                        table.remove(nodes, j)
                     end
                 end
             else
@@ -42,9 +43,9 @@ local M = {
             if status == bret.RUNNING then
                 if nodes == nil then
                     nodes = {}
-                    while #env.stack > level do
-                        table.insert(nodes, 1, env:pop_stack())
-                    end
+                end
+                while #env.stack > level do
+                    table.insert(nodes, 1, env:pop_stack())
                 end
             else
                 nodes = {}

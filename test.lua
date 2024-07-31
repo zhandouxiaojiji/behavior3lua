@@ -132,3 +132,14 @@ local function test_repeat_until_fail()
 end
 
 test_repeat_until_fail()
+
+local function test_parallel_with_wait()
+    print("=================== test parallel with wait ========================")
+    local btree = behavior_tree.new("parallel-with-wait", load_tree("workspace/trees/test-parallel-with-wait.json"), {
+    })
+    for i = 1, 8 do
+        btree:run()
+    end
+end
+
+test_parallel_with_wait()

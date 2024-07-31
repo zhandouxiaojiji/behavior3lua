@@ -1,0 +1,64 @@
+{
+  "name": "test-parallel-with-wait",
+  "root": {
+    "id": 1,
+    "name": "Sequence",
+    "children": [
+      {
+        "id": 2,
+        "name": "Parallel",
+        "children": [
+          {
+            "id": 3,
+            "name": "Sequence",
+            "children": [
+              {
+                "id": 4,
+                "name": "WaitForCount",
+                "args": {
+                  "tick": 1
+                }
+              },
+              {
+                "id": 5,
+                "name": "WaitForCount",
+                "args": {
+                  "tick": 1
+                }
+              }
+            ]
+          },
+          {
+            "id": 6,
+            "name": "Sequence",
+            "children": [
+              {
+                "id": 7,
+                "name": "WaitForCount",
+                "args": {
+                  "tick": 1
+                }
+              },
+              {
+                "id": 8,
+                "name": "WaitForCount",
+                "args": {
+                  "tick": 2
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "name": "Log",
+        "args": {
+          "message": "End test parallel with wait"
+        }
+      }
+    ]
+  },
+  "export": true,
+  "desc": ""
+}

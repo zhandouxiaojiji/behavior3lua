@@ -29,6 +29,7 @@ return {
     ForEach      = require "behavior3.nodes.actions.foreach",
     Log          = require "behavior3.nodes.actions.log",
     Wait         = require "behavior3.nodes.actions.wait",
+    WaitForCount = require "behavior3.nodes.actions.wait_for_count",
     Now          = require "behavior3.nodes.actions.now",
     Clear        = require "behavior3.nodes.actions.clear",
     GetHp        = require "example.actions.get_hp",
