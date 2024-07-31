@@ -9,6 +9,10 @@
       "desc": "怪物测试AI"
     },
     {
+      "path": "trees/test-parallel-with-wait.json",
+      "desc": ""
+    },
+    {
       "path": "trees/test-parallel.json",
       "desc": ""
     },

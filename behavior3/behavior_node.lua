@@ -23,8 +23,6 @@ function mt:init(node_data, tree)
     self.info = sformat('node %s.%s %s', tree.name, self.id, self.name)
 
     self.data = node_data
-    self.data.input = self.data.input or {}
-    self.data.output = self.data.output or {}
     self.args = self.data.args or {}
     ---@type BehaviorNode[]
     self.children = {}

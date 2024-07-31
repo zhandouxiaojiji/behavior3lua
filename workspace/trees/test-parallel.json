@@ -86,13 +86,33 @@
                 "args": {
                   "message": "hell3 done"
                 }
+              },
+              {
+                "id": 15,
+                "name": "Sequence",
+                "children": [
+                  {
+                    "id": 16,
+                    "name": "Wait",
+                    "args": {
+                      "time": 1
+                    }
+                  },
+                  {
+                    "id": 17,
+                    "name": "Log",
+                    "args": {
+                      "message": "wait going"
+                    }
+                  }
+                ]
               }
             ]
           }
         ]
       },
       {
-        "id": 15,
+        "id": 18,
         "name": "Log",
         "args": {
           "message": "Parallel done"
