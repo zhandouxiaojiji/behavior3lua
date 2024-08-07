@@ -7,6 +7,7 @@ local M = {
 ---@param input_value any
 ---@param arg_value any
 ---@param default_value any
+---@return any
 function M.check_oneof(node, input_idx, input_value, arg_value, default_value)
     local input_name = node.data.input[input_idx]
     local value
@@ -28,6 +29,11 @@ function M.check_oneof(node, input_idx, input_value, arg_value, default_value)
     else
         return value
     end
+end
+
+---@param node BehaviorNode
+function M.warn(node, msg)
+    print(string.format("[WARN] %s->${%s}#${$d}: %s", node.tree.name, node.name, node.id, msg))
 end
 
 return M
