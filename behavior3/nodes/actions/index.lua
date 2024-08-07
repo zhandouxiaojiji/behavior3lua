@@ -4,7 +4,8 @@ local bret = require "behavior3.behavior_ret"
 local M = {
     name = "Index",
     type = "Action",
-    desc = "索引输入的数组或对象",
+    children = 0,
+    desc = "索引输入的数组",
     args = {
         {
             name = "idx",
@@ -22,18 +23,15 @@ local M = {
         if not arr then
             return bret.FAIL
         end
-        local value
-        if #arr > 0 then
-            local idx = key or tonumber(node.args.idx)
-            if type(key) ~= "number" then
-                print(string.format("%s->${%s}#${$d}: index type error",
-                    node.tree.name, node.name, node.id))
-            end
-            value = arr[idx]
-        else
-            value = arr[key or node.args.idx]
+        if not key then
+            key = tonumber(node.args.idx)
+        end
+        if type(key) ~= "number" then
+            print(string.format("%s: index type error", node.info))
+            return bret.FAIL
         end
 
+        local value = arr[key + 1]
         if value == nil then
             return bret.FAIL
         end
