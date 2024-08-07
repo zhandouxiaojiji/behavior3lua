@@ -8,7 +8,7 @@ local M = {
     desc = "索引输入的数组",
     args = {
         {
-            name = "idx",
+            name = "index",
             type = "string",
             desc = "索引",
         }
@@ -24,7 +24,7 @@ local M = {
             return bret.FAIL
         end
         if not key then
-            key = tonumber(node.args.idx)
+            key = tonumber(node.args.index)
         end
         if type(key) ~= "number" then
             print(string.format("%s: index type error", node.info))
